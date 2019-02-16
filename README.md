@@ -1,0 +1,2 @@
+# DebugConsoleFairyGUI
+一个基于FairyGUI的控制台，用于在Unity游戏过程中查看调试消息和执行命令
