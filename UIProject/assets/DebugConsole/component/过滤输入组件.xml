@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1134,32">
+  <displayList>
+    <image id="n0_ku63" name="bg" src="ku63u" fileName="image/白色圆角底图.png" xy="0,0" size="1134,32" color="#20201d">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_ku63" name="seach_img" src="ku63x" fileName="image/Icon放大镜.png" xy="8,1" size="32,32">
+      <relation target="" sidePair="middle-middle,left-left"/>
+    </image>
+    <text id="n2_ku63" name="input_text" xy="44,4" size="1031,25" input="true" prompt="Filter" fontSize="18" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" text="">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+    <component id="n3_ku63" name="btn_close" src="ku6316" fileName="component/关闭按钮.xml" xy="1091,4" size="24,24">
+      <relation target="" sidePair="right-right,middle-middle"/>
+    </component>
+  </displayList>
+</component>

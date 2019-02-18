@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1136,640" overflow="hidden">
+  <displayList>
+    <image id="n0_ku63" name="image" src="ku63v" fileName="image/白色底图.png" xy="-2,-2" size="1140,644" color="#2e2e29">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+  </displayList>
+</component>

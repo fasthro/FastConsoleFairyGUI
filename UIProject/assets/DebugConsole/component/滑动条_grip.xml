@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="64,64" overflow="hidden" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_ku63" name="n0" src="ku63v" fileName="image/白色底图.png" xy="-2,-2" size="68,68" color="#2e2e29">
+      <gearDisplay controller="button" pages="0,2"/>
+    </image>
+    <image id="n1_ku63" name="n1" src="ku63v" fileName="image/白色底图.png" xy="-2,-2" size="68,68" color="#2e2e29">
+      <gearDisplay controller="button" pages="1,3"/>
+    </image>
+  </displayList>
+  <Button/>
+</component>

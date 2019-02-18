@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1134,32">
+  <displayList>
+    <image id="n0_ku63" name="bg" src="ku63u" fileName="image/白色圆角底图.png" xy="0,0" size="1134,32" color="#20201d">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_ku63" name="seach_img" src="ku6312" fileName="image/IconCmd.png" xy="8,0" size="32,32"/>
+    <text id="n2_ku63" name="input_text" xy="44,4" size="1072,25" input="true" fontSize="18" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" text="">
+      <relation target="" sidePair="width-width,height-height"/>
+    </text>
+  </displayList>
+</component>

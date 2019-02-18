@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1136,640" overflow="hidden" opaque="false" designImage="ui://n5bjuvogku63h" designImageAlpha="0" bgColor="#2e2e29">
+  <displayList>
+    <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <component id="n2_ku63" name="clear_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku63a"/>
+    </component>
+    <component id="n3_ku63" name="collapse_btn" src="ku63y" fileName="component/Icon复选按钮.xml" xy="161,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku639"/>
+    </component>
+    <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="321,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku636"/>
+    </component>
+    <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="481,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku63e"/>
+    </component>
+    <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="641,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku638"/>
+    </component>
+    <component id="n19_ku63" name="logcat_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="801,1" size="160,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku63z"/>
+    </component>
+    <component id="n7_ku63" name="hide_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="961,1" size="88,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku6315"/>
+    </component>
+    <component id="n21_ku63" name="fliter_com" src="ku6310" fileName="component/过滤输入组件.xml" xy="1,35" size="1134,32">
+      <relation target="" sidePair="width-width,top-top"/>
+    </component>
+    <list id="n8_ku63" name="list" xy="1,70" size="1134,532" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+      <item/>
+    </list>
+    <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,606">
+      <relation target="" sidePair="width-width,bottom-bottom"/>
+    </component>
+    <component id="n23_ku63" name="n23" src="ku63i" fileName="component/Icon按钮.xml" xy="1049,0" size="88,32">
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku6313"/>
+    </component>
+  </displayList>
+</component>

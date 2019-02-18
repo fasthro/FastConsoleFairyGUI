@@ -1,0 +1,15 @@
+{
+	"buttonClickSound":"",
+	"colorScheme":["背景色 #2E2E29","按钮正常色 #20201D","按钮按下色 #4D4D4D","l列表深色 #373737","列表浅色 #3C3C3C","标题底色 #262626","正文字体色 #A7A7A7","标题字体色 #FFFFFF"],
+	"font":"_sans",
+	"fontScheme":["默认字体"],
+	"fontSize":12,
+	"fontSizeScheme":["自定义字体大小 30"],
+	"scrollBars":{
+		"defaultDisplay":"visible",
+		"horizontal":"",
+		"vertical":""
+	},
+	"textColor":"#000000",
+	"tipsRes":""
+}

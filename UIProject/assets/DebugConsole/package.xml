@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<packageDescription id="n5bjuvog" jpegQuality="80" compressPNG="true">
+  <resources>
+    <image id="ku634" name="IconSnapToBottom.png" path="/image/"/>
+    <image id="ku636" name="IconInfo.png" path="/image/"/>
+    <image id="ku637" name="IconHide.png" path="/image/"/>
+    <image id="ku638" name="IconError.png" path="/image/"/>
+    <image id="ku639" name="Icon合并.png" path="/image/"/>
+    <image id="ku63a" name="Icon清理.png" path="/image/"/>
+    <image id="ku63e" name="IconWarning.png" path="/image/"/>
+    <image id="ku63f" name="IconSnapToBottomBg.png" path="/image/"/>
+    <component id="ku63g" name="panel.xml" path="/" exported="true"/>
+    <image id="ku63h" name="design.jpg" path="/"/>
+    <component id="ku63i" name="Icon按钮.xml" path="/component/"/>
+    <component id="ku63k" name="IconText按钮.xml" path="/component/"/>
+    <component id="ku63l" name="列表Item.xml" path="/component/"/>
+    <component id="ku63m" name="列表滑动条按钮.xml" path="/component/"/>
+    <component id="ku63n" name="列表滑动条.xml" path="/component/" exported="true"/>
+    <component id="ku63r" name="背景遮罩.xml" path="/component/"/>
+    <image id="ku63u" name="白色圆角底图.png" path="/image/" scale="9grid" scale9grid="16,16,32,32"/>
+    <image id="ku63v" name="白色底图.png" path="/image/" scale="9grid" scale9grid="16,16,32,32"/>
+    <image id="ku63x" name="Icon放大镜.png" path="/image/"/>
+    <component id="ku63y" name="Icon复选按钮.xml" path="/component/"/>
+    <image id="ku63z" name="IconLogcat.png" path="/image/"/>
+    <component id="ku6310" name="过滤输入组件.xml" path="/component/"/>
+    <component id="ku6311" name="命令输入组件.xml" path="/component/"/>
+    <image id="ku6312" name="Icon命令.png" path="/image/"/>
+    <image id="ku6313" name="Icon设置.png" path="/image/"/>
+    <image id="ku6315" name="Icon关闭.png" path="/image/"/>
+    <component id="ku6316" name="关闭按钮.xml" path="/component/"/>
+    <component id="ku6317" name="setting_panel.xml" path="/" exported="true"/>
+    <component id="ku631c" name="标题组件.xml" path="/component/"/>
+    <component id="ku631d" name="副标题组件.xml" path="/component/"/>
+    <component id="ku631e" name="滑动条_grip.xml" path="/component/"/>
+    <component id="ku631f" name="滑动条.xml" path="/component/"/>
+  </resources>
+  <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
+    <atlas compression="true" index="0"/>
+    <atlas compression="true" index="1"/>
+    <atlas compression="true" index="2"/>
+    <atlas compression="true" index="3"/>
+    <atlas compression="true" index="4"/>
+    <atlas compression="true" index="5"/>
+    <atlas compression="true" index="6"/>
+    <atlas compression="true" index="7"/>
+    <atlas compression="true" index="8"/>
+    <atlas compression="true" index="9"/>
+    <atlas compression="true" index="10"/>
+  </publish>
+</packageDescription>

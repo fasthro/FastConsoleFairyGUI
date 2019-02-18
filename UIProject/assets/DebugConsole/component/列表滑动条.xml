@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="32,200" extention="ScrollBar">
+  <displayList>
+    <image id="n0_ku63" name="n0" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="32,200" color="#373737">
+      <relation target="" sidePair="height-height"/>
+    </image>
+    <graph id="n1_ku63" name="bar" xy="0,0" size="32,200">
+      <relation target="" sidePair="height-height"/>
+    </graph>
+    <component id="n2_ku63" name="grip" src="ku63m" fileName="component/list_scroll_bar_grip.xml" xy="0,20"/>
+  </displayList>
+  <ScrollBar/>
+</component>
