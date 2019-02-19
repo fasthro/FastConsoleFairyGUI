@@ -63,7 +63,7 @@
     <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,606">
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </component>
-    <component id="n23_ku63" name="n23" src="ku63i" fileName="component/Icon按钮.xml" xy="1049,0" size="88,32">
+    <component id="n23_ku63" name="setting_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1049,0" size="88,32">
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>

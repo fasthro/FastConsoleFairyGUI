@@ -31,11 +31,45 @@ namespace DebugConsoleFairyGUI
         #endregion
 
         #region  
+        // 收缩
+        private bool m_collapsed;
+        public bool collapsed
+        {
+            get
+            {
+                return m_collapsed;
+            }
+        }
 
-        public bool collapsed;
-        public bool infoSelected;
-        public bool warnSelected;
-        public bool errorSelected;
+        //info
+        private bool m_infoSelected;
+        public bool infoSelected
+        {
+            get
+            {
+                return m_infoSelected;
+            }
+        }
+
+        // warn
+        private bool m_warnSelected;
+        public bool warnSelected
+        {
+            get
+            {
+                return warnSelected;
+            }
+        }
+
+        // error
+        private bool m_errorSelected;
+        public bool errorSelected
+        {
+            get
+            {
+                return errorSelected;
+            }
+        }
 
         #endregion
 
@@ -50,9 +84,9 @@ namespace DebugConsoleFairyGUI
                 UIPackage.AddPackage(LogConst.UI_PACKAGE_PATH);
 
                 // log 条目列表
-                logEntrys = new List<LogEntry>(128);
-                logShowEntrys = new List<LogEntry>(128);
-                logCollapsedEntryDic = new Dictionary<LogEntry, int>(128);
+                logEntrys = new List<LogEntry>();
+                logShowEntrys = new List<LogEntry>();
+                logCollapsedEntryDic = new Dictionary<LogEntry, int>();
             }
         }
 
@@ -90,28 +124,31 @@ namespace DebugConsoleFairyGUI
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)
         {
-            LogEntry logEntry = new LogEntry(GetDebugConsoleTag(logString), logString, stackTrace, logType);
+            LogEntry logEntry = new LogEntry(GetTag(logString), logString, stackTrace, logType);
 
             logEntrys.Add(logEntry);
 
-            if (!collapsed)
+            if (!m_collapsed)
             {
-                if (infoSelected || warnSelected || errorSelected)
+                if (GetSelectedRule(logEntry))
                 {
                     logShowEntrys.Add(logEntry);
                 }
             }
             else
             {
-                int index = -1;
-                if (logCollapsedEntryDic.TryGetValue(logEntry, out index))
+                if (GetSelectedRule(logEntry))
                 {
-                    logShowEntrys[index].count++;
-                }
-                else
-                {
-                    logCollapsedEntryDic.Add(logEntry, logShowEntrys.Count);
-                    logShowEntrys.Add(logEntry);
+                    int index = -1;
+                    if (logCollapsedEntryDic.TryGetValue(logEntry, out index))
+                    {
+                        logShowEntrys[index].count++;
+                    }
+                    else
+                    {
+                        logCollapsedEntryDic.Add(logEntry, logShowEntrys.Count);
+                        logShowEntrys.Add(logEntry);
+                    }
                 }
             }
 
@@ -119,9 +156,51 @@ namespace DebugConsoleFairyGUI
         }
 
         // 获取LogTag
-        private string GetDebugConsoleTag(string logContent)
+        private string GetTag(string logContent)
         {
             return "";
+        }
+
+        // 获取选择的规则
+        private bool GetSelectedRule(LogEntry entry)
+        {
+            // var info = infoSelected && entry.logType == LogType.Log;
+            // var warn = warnSelected && entry.logType == LogType.Warning;
+            // var error = errorSelected && entry.logType == LogType.Error;
+
+            // return info || warn || error;
+            Debug.Log(infoSelected);
+            Debug.Log(entry.logType);
+            Debug.Log(infoSelected && entry.logType == LogType.Log);
+            return true;
+        }
+
+        // 重新设置选择
+        private void Reset()
+        {
+            logShowEntrys.Clear();
+            logCollapsedEntryDic.Clear();
+
+            if (!m_collapsed)
+            {
+                for (int i = 0; i < logEntrys.Count; i++)
+                {
+                    if (GetSelectedRule(logEntrys[i]))
+                    {
+                        logShowEntrys.Add(logEntrys[i]);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < logEntrys.Count; i++)
+                {
+                    if (GetSelectedRule(logEntrys[i]))
+                    {
+
+                    }
+                }
+            }
         }
 
         // 清理Log
@@ -132,6 +211,38 @@ namespace DebugConsoleFairyGUI
             logCollapsedEntryDic.Clear();
 
             m_mainUI.Refresh();
+        }
+
+        // 设置收缩
+        public void SetCollapsed(bool selected)
+        {
+            this.m_collapsed = selected;
+
+            Reset();
+        }
+
+        // 设置Info
+        public void SetInfo(bool selected)
+        {
+            this.m_infoSelected = m_collapsed;
+
+            Reset();
+        }
+
+        // 设置warn
+        public void SetWarn(bool selected)
+        {
+            this.m_warnSelected = selected;
+
+            Reset();
+        }
+
+        // 设置error
+        public void SetError(bool selected)
+        {
+            this.m_errorSelected = selected;
+
+            Reset();
         }
     }
 }
