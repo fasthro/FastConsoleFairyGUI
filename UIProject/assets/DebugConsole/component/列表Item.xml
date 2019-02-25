@@ -25,9 +25,13 @@
     </image>
     <image id="n5_irtl" name="count_img" src="irtl1g" fileName="image/圆圈.png" xy="1055,-2" size="44,44" group="n7_irtl" color="#20201d"/>
     <text id="n6_irtl" name="count_text" xy="1073,11" pivot="0.5,0.5" size="10,20" group="n7_irtl" fontSize="14" color="#a7a7a7" align="center" vAlign="middle" text=""/>
-    <group id="n7_irtl" name="count_group" xy="1055,-2" size="44,44" advanced="true">
+    <group id="n7_irtl" name="count_group" xy="1055,-2" size="44,44" advanced="true" collapsed="true">
       <gearDisplay controller="group" pages="0"/>
       <relation target="" sidePair="top-top,right-right"/>
     </group>
+    <component id="n11_puz5" name="btn_copy" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1061,3">
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button icon="ui://n5bjuvognrdq20"/>
+    </component>
   </displayList>
 </component>

@@ -34,7 +34,6 @@ namespace DebugConsoleFairyGUI
 
         // 是否列表保持在最下面
         private bool m_keepBottom;
-
         // 当前选中的数据
         private LogEntry selectedData;
 
@@ -116,6 +115,8 @@ namespace DebugConsoleFairyGUI
             var contentText = item.GetChild("content_text").asRichTextField;
             var countText = item.GetChild("count_text").asTextField;
 
+            var copyBtn = item.GetChild("btn_copy").asButton;
+
             // type
             if (data.logType == DebugLogType.Log)
             {
@@ -170,7 +171,27 @@ namespace DebugConsoleFairyGUI
                 countText.text = data.logCount.ToString();
             }
 
-            contentText.text = data.logContent;
+            if (manager.single && data.selected)
+            {
+                contentText.autoSize = AutoSizeType.Height;
+                contentText.text = data.ToString();
+
+                item.height = contentText.textHeight;
+
+                copyBtn.visible = true;
+                copyBtn.data = data;
+                copyBtn.onClick.Set(OckClickItemCopy);
+            }
+            else
+            {
+                contentText.autoSize = AutoSizeType.None;
+                contentText.text = data.logContent;
+                contentText.height = contentText.initHeight;
+
+                copyBtn.visible = false;
+
+                item.height = item.initHeight;
+            }
 
             item.data = data;
         }
@@ -181,16 +202,19 @@ namespace DebugConsoleFairyGUI
             LogEntry data = item.data as LogEntry;
 
             // 显示日志详情界面
-            if (m_detailUI == null)
+            if (!manager.single)
             {
-                m_detailUI = new UIDebugConsoleDetail();
-                m_detailUI.Show();
-                m_detailUI.Refresh(data);
-            }
-            else
-            {
-                m_detailUI.Show();
-                m_detailUI.Refresh(data);
+                if (m_detailUI == null)
+                {
+                    m_detailUI = new UIDebugConsoleDetail();
+                    m_detailUI.Show();
+                    m_detailUI.Refresh(data);
+                }
+                else
+                {
+                    m_detailUI.Show();
+                    m_detailUI.Refresh(data);
+                }
             }
 
             // 选中状态设置
@@ -207,17 +231,12 @@ namespace DebugConsoleFairyGUI
             m_keepBottom = false;
         }
 
-        private void SetItemSelected(GComponent item, bool selected)
+        private void OckClickItemCopy(EventContext context)
         {
-            var selectController = item.GetController("select");
-            if (selected)
-            {
-                selectController.SetSelectedIndex(1);
-            }
-            else
-            {
-                selectController.SetSelectedIndex(0);
-            }
+            GComponent item = context.sender as GComponent;
+            LogEntry data = item.data as LogEntry;
+
+            // TODO COPY
         }
 
         private void OnTouchBegin()

@@ -6,5 +6,5 @@
       <relation target="" sidePair="middle-middle,center-center"/>
     </loader>
   </displayList>
-  <Button/>
+  <Button downEffect="dark" downEffectValue="0.80"/>
 </component>

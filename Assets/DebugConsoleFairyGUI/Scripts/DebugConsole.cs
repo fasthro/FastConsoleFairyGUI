@@ -87,6 +87,12 @@ namespace DebugConsoleFairyGUI
 
         #endregion
 
+        #region setting
+        // 单一条条目选中显示日志详情
+        public bool single = false;
+        
+        #endregion
+
         void OnEnable()
         {
             Application.logMessageReceived -= ReceivedLog;
@@ -131,7 +137,7 @@ namespace DebugConsoleFairyGUI
                 var ran = Random.Range(1, 5);
                 if (ran == 1)
                 {
-                    Debug.Log("日志输出 : " + ran);
+                    Debug.Log("日\n志\n输\n出 : " + ran);
                 }
                 else if (ran == 3)
                 {
