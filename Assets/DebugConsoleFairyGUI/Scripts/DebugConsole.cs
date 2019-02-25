@@ -89,7 +89,12 @@ namespace DebugConsoleFairyGUI
 
         #region setting
         // 单一条条目选中显示日志详情
-        public bool single = false;
+        [HideInInspector]
+        public bool singleShow = false;
+
+        // 接收Logcat日志
+        [HideInInspector]
+        public bool receivedLogcat = false;
         
         #endregion
 

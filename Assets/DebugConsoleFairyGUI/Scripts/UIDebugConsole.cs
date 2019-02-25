@@ -17,6 +17,8 @@ namespace DebugConsoleFairyGUI
 
         // 日志详情界面
         private UIDebugConsoleDetail m_detailUI;
+        // 日志设置界面
+        private UIDebugConsoleSetting m_settingUI;
 
         #region component
 
@@ -171,7 +173,7 @@ namespace DebugConsoleFairyGUI
                 countText.text = data.logCount.ToString();
             }
 
-            if (manager.single && data.selected)
+            if (!manager.singleShow && data.selected)
             {
                 contentText.autoSize = AutoSizeType.Height;
                 contentText.text = data.ToString();
@@ -202,7 +204,7 @@ namespace DebugConsoleFairyGUI
             LogEntry data = item.data as LogEntry;
 
             // 显示日志详情界面
-            if (!manager.single)
+            if (manager.singleShow)
             {
                 if (m_detailUI == null)
                 {
@@ -311,7 +313,11 @@ namespace DebugConsoleFairyGUI
 
         private void OckSetting()
         {
-
+            if(m_settingUI == null)
+            {
+                m_settingUI = new UIDebugConsoleSetting(manager);
+            }
+            m_settingUI.Show();
         }
 
         private void OckClose()

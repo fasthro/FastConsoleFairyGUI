@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="200,68" opaque="false" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n2_puz5" name="bg" src="puz529" fileName="image/复选框1.png" xy="0,0" size="200,68" color="#4d4d4d">
+      <gearColor controller="button" pages="1,3" values="#ffbd17|#ffbd17" default="#4d4d4d"/>
+      <relation target="" sidePair="width-width,top-top"/>
+    </image>
+    <image id="n0_puz5" name="n0" src="puz524" fileName="image/开关2.png" xy="118,2" color="#4d4d4d">
+      <gearDisplay controller="button" pages="0,2"/>
+      <relation target="" sidePair="right-right,middle-middle"/>
+    </image>
+    <image id="n1_puz5" name="n1" src="puz525" fileName="image/开关1.png" xy="118,2" color="#ffbd17">
+      <gearDisplay controller="button" pages="1,3"/>
+      <relation target="" sidePair="right-right,middle-middle"/>
+    </image>
+    <text id="n3_puz5" name="title" xy="24,22" size="10,27" fontSize="20" color="#dedcdc" text="">
+      <relation target="" sidePair="left-left,middle-middle"/>
+    </text>
+    <component id="n5_puz5" name="n5" src="puz52b" fileName="component/空白组件.xml" xy="118,17" size="64,34">
+      <relation target="n0_puz5" sidePair="left-left,top-top"/>
+    </component>
+  </displayList>
+  <Button mode="Check"/>
+</component>

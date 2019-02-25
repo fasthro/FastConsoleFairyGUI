@@ -16,8 +16,9 @@
     <loader id="n3_ku63" name="icon" xy="20,14" size="32,32" align="center" vAlign="middle" fill="scaleFree">
       <relation target="" sidePair="left-left,middle-middle"/>
     </loader>
-    <component id="n4_ku63" name="close_btn" src="ku6316" fileName="component/关闭按钮.xml" xy="257,14">
+    <component id="n4_ku63" name="close_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="257,14">
       <relation target="" sidePair="middle-middle,right-right"/>
+      <Button icon="ui://n5bjuvogku6315"/>
     </component>
   </displayList>
   <Button mode="Check"/>

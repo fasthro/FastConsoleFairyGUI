@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1136,640">
+  <controller name="sign_show" pages="0,未选中,1,选中" selected="0"/>
   <displayList>
-    <component id="n3_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0">
+    <component id="n3_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="0,0" size="1136,60">
       <Button icon="ui://n5bjuvogku6313"/>
+    </component>
+    <component id="n18_puz5" name="single_show_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,76" size="1100,68">
+      <Button title="单独界面展示日志详情"/>
+    </component>
+    <component id="n19_puz5" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,159" size="1100,68">
+      <Button title="接收Logcat日志"/>
     </component>
   </displayList>
 </component>

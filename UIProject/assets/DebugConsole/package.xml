@@ -37,6 +37,13 @@
     <component id="nrdq21" name="detail_panel.xml" path="/" exported="true"/>
     <component id="nrdq22" name="detail_item.xml" path="/component/"/>
     <image id="nrdq23" name="blue_button.png" path="/image/"/>
+    <image id="puz524" name="开关2.png" path="/image/"/>
+    <image id="puz525" name="开关1.png" path="/image/"/>
+    <component id="puz526" name="开关按钮.xml" path="/component/"/>
+    <image id="puz528" name="复选框2.png" path="/image/" scale="9grid" scale9grid="16,16,32,32"/>
+    <image id="puz529" name="复选框1.png" path="/image/" scale="9grid" scale9grid="27,27,10,10"/>
+    <component id="puz52a" name="复选框按钮.xml" path="/component/"/>
+    <component id="puz52b" name="空白组件.xml" path="/component/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>
