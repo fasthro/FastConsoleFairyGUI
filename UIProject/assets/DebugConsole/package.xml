@@ -10,7 +10,6 @@
     <image id="ku63e" name="IconWarning.png" path="/image/"/>
     <image id="ku63f" name="IconSnapToBottomBg.png" path="/image/"/>
     <component id="ku63g" name="panel.xml" path="/" exported="true"/>
-    <image id="ku63h" name="design.jpg" path="/"/>
     <component id="ku63i" name="Icon按钮.xml" path="/component/"/>
     <component id="ku63k" name="IconText按钮.xml" path="/component/"/>
     <component id="ku63l" name="列表Item.xml" path="/component/"/>
@@ -27,13 +26,17 @@
     <image id="ku6312" name="Icon命令.png" path="/image/"/>
     <image id="ku6313" name="Icon设置.png" path="/image/"/>
     <image id="ku6315" name="Icon关闭.png" path="/image/"/>
-    <component id="ku6316" name="关闭按钮.xml" path="/component/"/>
     <component id="ku6317" name="setting_panel.xml" path="/" exported="true"/>
     <component id="ku631c" name="标题组件.xml" path="/component/"/>
     <component id="ku631d" name="副标题组件.xml" path="/component/"/>
     <component id="ku631e" name="滑动条_grip.xml" path="/component/"/>
     <component id="ku631f" name="滑动条.xml" path="/component/"/>
     <image id="irtl1g" name="圆圈.png" path="/image/"/>
+    <component id="w29t1h" name="Icon透明按钮.xml" path="/component/"/>
+    <image id="nrdq20" name="IconCopy.png" path="/image/"/>
+    <component id="nrdq21" name="detail_panel.xml" path="/" exported="true"/>
+    <component id="nrdq22" name="detail_item.xml" path="/component/"/>
+    <image id="nrdq23" name="blue_button.png" path="/image/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>

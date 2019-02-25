@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1136,640" overflow="hidden" opaque="false" designImage="ui://n5bjuvogku63h" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
+  <controller name="type" pages="0,info,1,warn,2,error" selected="0"/>
+  <displayList>
+    <component id="n25_w29t" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640" alpha="0.8">
+      <relation target="" sidePair="width-width,height-height"/>
+    </component>
+    <image id="n44_nrdq" name="bg_img" src="ku63u" fileName="image/白色圆角底图.png" xy="8,32" size="1120,602" color="#20201d">
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n50_nrdq" name="error_img" src="ku638" fileName="image/IconError.png" xy="28,42" size="24,24">
+      <gearDisplay controller="type" pages="2"/>
+    </image>
+    <image id="n52_nrdq" name="info_img" src="ku636" fileName="image/IconInfo.png" xy="28,42" size="24,24">
+      <gearDisplay controller="type" pages="0"/>
+    </image>
+    <image id="n53_nrdq" name="warn_img" src="ku63e" fileName="image/IconWarning.png" xy="28,42" size="24,24">
+      <gearDisplay controller="type" pages="1"/>
+    </image>
+    <text id="n51_nrdq" name="tag_text" xy="57,42" size="10,25" fontSize="18" color="#ffffff" vAlign="middle" bold="true" text=""/>
+    <list id="n46_nrdq" name="list" xy="29,77" size="1078,508" overflow="scroll" defaultItem="ui://n5bjuvognrdq22">
+      <relation target="" sidePair="width-width,height-height"/>
+      <item/>
+    </list>
+    <component id="n48_nrdq" name="copy_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1009,586" size="48,48">
+      <relation target="n46_nrdq" sidePair="right-right,bottom-bottom"/>
+      <Button icon="ui://n5bjuvognrdq20"/>
+    </component>
+    <component id="n49_nrdq" name="close_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1057,586" size="48,48">
+      <relation target="n46_nrdq" sidePair="bottom-bottom,right-right"/>
+      <Button icon="ui://n5bjuvogku6315"/>
+    </component>
+  </displayList>
+</component>

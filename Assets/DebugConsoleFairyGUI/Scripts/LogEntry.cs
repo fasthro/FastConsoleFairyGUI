@@ -22,6 +22,9 @@ namespace DebugConsoleFairyGUI
         public string stackContent;
         // 当前日志数量
         public int logCount;
+        // 是否选中
+        public bool selected;
+
         // 哈希值
         private int m_hasValue;
         // 是否已经生成了哈希值
@@ -37,17 +40,19 @@ namespace DebugConsoleFairyGUI
             this.stackContent = stackContent;
             this.logType = logType;
             this.logCount = 1;
+            this.selected = false;
         }
 
         public void Reset()
         {
-            this.logCount = 1;
+            logCount = 1;
+            selected = false;
         }
 
         public override string ToString()
         {
             if(string.IsNullOrEmpty(m_content))
-                m_content = string.Concat(logContent, "\n", stackContent);
+                m_content = string.Concat(logContent, "\n\n", stackContent);
             return m_content;
         }
 

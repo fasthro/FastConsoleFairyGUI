@@ -191,7 +191,7 @@ namespace DebugConsoleFairyGUI
         // 获取LogTag
         private string GetTag(string logContent)
         {
-            return "";
+            return "DebugConsole";
         }
 
         // Unity LogType to DebugLogType
