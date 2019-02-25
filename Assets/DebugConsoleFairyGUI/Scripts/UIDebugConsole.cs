@@ -45,23 +45,18 @@ namespace DebugConsoleFairyGUI
             m_clearBtn.onClick.Set(OckClear);
 
             m_collapsedBtn = contentPane.GetChild("collapse_btn").asButton;
-            m_collapsedBtn.selected = manager.collapsed;
             m_collapsedBtn.onClick.Set(OckCollapse);
 
             m_infoBtn = contentPane.GetChild("info_btn").asButton;
-            m_infoBtn.selected = manager.infoSelected;
             m_infoBtn.onClick.Set(OckInfo);
 
             m_warnBtn = contentPane.GetChild("warn_btn").asButton;
-            //m_warnBtn.selected = manager.warnSelected;
             m_warnBtn.onClick.Set(OckWarn);
 
             m_errorBtn = contentPane.GetChild("error_btn").asButton;
-            //m_errorBtn.selected = manager.errorSelected;
             m_errorBtn.onClick.Set(OckError);
             
             m_logcatgBtn = contentPane.GetChild("logcat_btn").asButton;
-            //m_logcatgBtn.selected = false;
             m_logcatgBtn.onClick.Set(OckLogcat);
 
             m_settingBtn = contentPane.GetChild("setting_btn").asButton;
@@ -78,17 +73,20 @@ namespace DebugConsoleFairyGUI
 
             var colorController = item.GetController("color");
             var typeController = item.GetController("type");
+            var groupController = item.GetController("group");
+            
             var contentText = item.GetChild("content_text").asRichTextField;
+            var countText = item.GetChild("count_text").asTextField;
 
-            if (data.logType == LogType.Log)
+            if (data.logType == DebugLogType.Log)
             {
                 typeController.SetSelectedIndex(0);
             }
-            else if (data.logType == LogType.Warning)
+            else if (data.logType == DebugLogType.Warning)
             {
                 typeController.SetSelectedIndex(1);
             }
-            else if (data.logType == LogType.Error)
+            else if (data.logType == DebugLogType.Error)
             {
                 typeController.SetSelectedIndex(2);
             }
@@ -102,7 +100,34 @@ namespace DebugConsoleFairyGUI
                 colorController.SetSelectedIndex(1);
             }
 
+            if(data.logCount > 1)
+            {
+                groupController.SetSelectedIndex(0);
+            }
+            else
+            {
+                groupController.SetSelectedIndex(1);
+            }
+
+            if(data.logCount > 999)
+            {
+                countText.text = "999+";
+            }
+            else{
+                countText.text = data.logCount.ToString();
+            }
+            
             contentText.text = data.logContent;
+        }
+
+        public void Refresh()
+        {
+            m_list.numItems = manager.logShowEntrys.Count;
+
+            // count
+            m_infoBtn.title = manager.infoCount.ToString();
+            m_warnBtn.title = manager.warnCount.ToString();
+            m_errorBtn.title = manager.errorCount.ToString();
         }
 
         private void OckClear()
@@ -117,7 +142,6 @@ namespace DebugConsoleFairyGUI
 
         private void OckInfo()
         {
-            Debug.Log(m_infoBtn.selected);
             manager.SetInfo(m_infoBtn.selected);
         }
 
@@ -144,11 +168,6 @@ namespace DebugConsoleFairyGUI
         private void OckClose()
         {
 
-        }
-
-        public void Refresh()
-        {
-            m_list.numItems = manager.logShowEntrys.Count;
         }
     }
 }

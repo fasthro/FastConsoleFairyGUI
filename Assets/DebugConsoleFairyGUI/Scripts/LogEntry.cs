@@ -15,14 +15,13 @@ namespace DebugConsoleFairyGUI
         // 日志tag
         public string logTag;
 		// 日志类型
-		public LogType logType;
+		public DebugLogType logType;
         // 日志内容
         public string logContent;
         // 日志堆栈内容
         public string stackContent;
-        // 相同日志条数
-        public int count;
-
+        // 当前日志数量
+        public int logCount;
         // 哈希值
         private int m_hasValue;
         // 是否已经生成了哈希值
@@ -31,14 +30,18 @@ namespace DebugConsoleFairyGUI
         // tostring content
         private string m_content;
 
-        public LogEntry(string logTag, string logContent, string stackContent, LogType logType)
+        public LogEntry(string logTag, string logContent, string stackContent, DebugLogType logType)
         {
             this.logTag = logTag;
             this.logContent = logContent;
             this.stackContent = stackContent;
             this.logType = logType;
+            this.logCount = 1;
+        }
 
-            count = 1;
+        public void Reset()
+        {
+            this.logCount = 1;
         }
 
         public override string ToString()

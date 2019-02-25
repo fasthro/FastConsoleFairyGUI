@@ -33,6 +33,7 @@
     <component id="ku631d" name="副标题组件.xml" path="/component/"/>
     <component id="ku631e" name="滑动条_grip.xml" path="/component/"/>
     <component id="ku631f" name="滑动条.xml" path="/component/"/>
+    <image id="irtl1g" name="圆圈.png" path="/image/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>

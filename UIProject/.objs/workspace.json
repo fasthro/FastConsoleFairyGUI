@@ -1,4 +1,8 @@
 {
+	"expanded_nodes": [
+		"n5bjuvog",
+		"/"
+	],
 	"active_doc": [
 		"n5bjuvog",
 		"ku63g"
@@ -12,10 +16,10 @@
 		"n5bjuvog",
 		"ku63l",
 		"n5bjuvog",
-		"ku63y"
-	],
-	"expanded_nodes": [
+		"ku63y",
 		"n5bjuvog",
-		"/"
+		"ku631f",
+		"n5bjuvog",
+		"ku63k"
 	]
 }

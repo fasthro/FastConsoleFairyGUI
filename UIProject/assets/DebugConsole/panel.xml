@@ -14,15 +14,15 @@
     </component>
     <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="321,1" size="160,32">
       <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku636"/>
+      <Button checked="true" icon="ui://n5bjuvogku636"/>
     </component>
     <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="481,1" size="160,32">
       <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku63e"/>
+      <Button checked="true" icon="ui://n5bjuvogku63e"/>
     </component>
     <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="641,1" size="160,32">
       <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku638"/>
+      <Button checked="true" icon="ui://n5bjuvogku638"/>
     </component>
     <component id="n19_ku63" name="logcat_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="801,1" size="160,32">
       <relation target="" sidePair="top-top"/>

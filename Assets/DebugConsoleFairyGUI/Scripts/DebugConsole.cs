@@ -10,6 +10,13 @@ using FairyGUI;
 
 namespace DebugConsoleFairyGUI
 {
+    public enum DebugLogType
+    {
+        Log,
+        Warning,
+        Error,
+    }
+
     public class DebugConsole : MonoBehaviour
     {
         private static DebugConsole instance = null;
@@ -21,16 +28,23 @@ namespace DebugConsoleFairyGUI
         // log 条目列表
         private List<LogEntry> logEntrys;
 
-        // 合并字典
-        private Dictionary<LogEntry, int> logCollapsedEntryDic;
+        // 合并字典<日志条目,在logShowEntrys列表中的索引>
+        private Dictionary<LogEntry, int> sameEntryDic;
 
         // UI当前显示的列表
         [HideInInspector]
         public List<LogEntry> logShowEntrys;
 
+        // 日志数量
+        [HideInInspector]
+        public int infoCount;
+        [HideInInspector]
+        public int warnCount;
+        [HideInInspector]
+        public int errorCount;
         #endregion
 
-        #region  
+        #region 状态
         // 收缩
         private bool m_collapsed;
         public bool collapsed
@@ -42,7 +56,7 @@ namespace DebugConsoleFairyGUI
         }
 
         //info
-        private bool m_infoSelected;
+        private bool m_infoSelected = true;
         public bool infoSelected
         {
             get
@@ -52,7 +66,7 @@ namespace DebugConsoleFairyGUI
         }
 
         // warn
-        private bool m_warnSelected;
+        private bool m_warnSelected = true;
         public bool warnSelected
         {
             get
@@ -62,7 +76,7 @@ namespace DebugConsoleFairyGUI
         }
 
         // error
-        private bool m_errorSelected;
+        private bool m_errorSelected = true;
         public bool errorSelected
         {
             get
@@ -84,9 +98,9 @@ namespace DebugConsoleFairyGUI
                 UIPackage.AddPackage(LogConst.UI_PACKAGE_PATH);
 
                 // log 条目列表
-                logEntrys = new List<LogEntry>();
-                logShowEntrys = new List<LogEntry>();
-                logCollapsedEntryDic = new Dictionary<LogEntry, int>();
+                logEntrys = new List<LogEntry>(128);
+                logShowEntrys = new List<LogEntry>(128);
+                sameEntryDic = new Dictionary<LogEntry, int>(128);
             }
         }
 
@@ -109,50 +123,69 @@ namespace DebugConsoleFairyGUI
         }
 
         private float temp = 0;
-        private int index = 0;
         private void Update()
         {
             temp += Time.deltaTime;
             if (temp > 1.0f)
             {
-                Debug.Log("日志输出 : " + index);
-
+                var ran = Random.Range(1, 5);
+                if (ran == 1)
+                {
+                    Debug.Log("日志输出 : " + ran);
+                }
+                else if (ran == 3)
+                {
+                    Debug.LogWarning("日志输出 : " + ran);
+                }
+                else
+                {
+                    Debug.LogError("日志输出 : " + ran);
+                }
                 temp = 0;
-                index++;
             }
         }
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)
         {
-            LogEntry logEntry = new LogEntry(GetTag(logString), logString, stackTrace, logType);
+            LogEntry logEntry = new LogEntry(GetTag(logString), logString, stackTrace, LogTypeToDebugLogType(logType));
 
             logEntrys.Add(logEntry);
 
+            SetReceivedLog(logEntry);
+
+            m_mainUI.Refresh();
+        }
+
+        // 设置log
+        private void SetReceivedLog(LogEntry logEntry)
+        {
             if (!m_collapsed)
             {
                 if (GetSelectedRule(logEntry))
                 {
                     logShowEntrys.Add(logEntry);
                 }
+
+                SetCount(logEntry);
             }
             else
             {
-                if (GetSelectedRule(logEntry))
+                int index = -1;
+                if (sameEntryDic.TryGetValue(logEntry, out index))
                 {
-                    int index = -1;
-                    if (logCollapsedEntryDic.TryGetValue(logEntry, out index))
+                    logShowEntrys[index].logCount++;
+                }
+                else
+                {
+                    if (GetSelectedRule(logEntry))
                     {
-                        logShowEntrys[index].count++;
-                    }
-                    else
-                    {
-                        logCollapsedEntryDic.Add(logEntry, logShowEntrys.Count);
+                        sameEntryDic.Add(logEntry, logShowEntrys.Count);
                         logShowEntrys.Add(logEntry);
                     }
+
+                    SetCount(logEntry);
                 }
             }
-
-            m_mainUI.Refresh();
         }
 
         // 获取LogTag
@@ -161,55 +194,67 @@ namespace DebugConsoleFairyGUI
             return "";
         }
 
+        // Unity LogType to DebugLogType
+        private DebugLogType LogTypeToDebugLogType(LogType logType)
+        {
+            if (logType == LogType.Log)
+                return DebugLogType.Log;
+            else if (logType == LogType.Warning)
+                return DebugLogType.Warning;
+            return DebugLogType.Error;
+        }
+
         // 获取选择的规则
         private bool GetSelectedRule(LogEntry entry)
         {
-            // var info = infoSelected && entry.logType == LogType.Log;
-            // var warn = warnSelected && entry.logType == LogType.Warning;
-            // var error = errorSelected && entry.logType == LogType.Error;
-
-            // return info || warn || error;
-            Debug.Log(infoSelected);
-            Debug.Log(entry.logType);
-            Debug.Log(infoSelected && entry.logType == LogType.Log);
-            return true;
+            if ((m_infoSelected && entry.logType == DebugLogType.Log)
+            || (m_warnSelected && entry.logType == DebugLogType.Warning)
+            || (m_errorSelected && entry.logType == DebugLogType.Error))
+                return true;
+            return false;
         }
 
-        // 重新设置选择
+        // 设置日志数量
+        private void SetCount(LogEntry logEntry)
+        {
+            if (logEntry.logType == DebugLogType.Log)
+            {
+                infoCount++;
+            }
+            else if (logEntry.logType == DebugLogType.Warning)
+            {
+                warnCount++;
+            }
+            else if (logEntry.logType == DebugLogType.Error)
+            {
+                errorCount++;
+            }
+        }
+
+        // 重置
         private void Reset()
         {
+            infoCount = 0;
+            warnCount = 0;
+            errorCount = 0;
+
             logShowEntrys.Clear();
-            logCollapsedEntryDic.Clear();
+            sameEntryDic.Clear();
 
-            if (!m_collapsed)
+            for (int i = 0; i < logEntrys.Count; i++)
             {
-                for (int i = 0; i < logEntrys.Count; i++)
-                {
-                    if (GetSelectedRule(logEntrys[i]))
-                    {
-                        logShowEntrys.Add(logEntrys[i]);
-                    }
-                }
+                logEntrys[i].Reset();
+                SetReceivedLog(logEntrys[i]);
             }
-            else
-            {
-                for (int i = 0; i < logEntrys.Count; i++)
-                {
-                    if (GetSelectedRule(logEntrys[i]))
-                    {
 
-                    }
-                }
-            }
+            m_mainUI.Refresh();
         }
 
         // 清理Log
         public void ClearLog()
         {
             logEntrys.Clear();
-            logShowEntrys.Clear();
-            logCollapsedEntryDic.Clear();
-
+            Reset();
             m_mainUI.Refresh();
         }
 
@@ -224,7 +269,7 @@ namespace DebugConsoleFairyGUI
         // 设置Info
         public void SetInfo(bool selected)
         {
-            this.m_infoSelected = m_collapsed;
+            this.m_infoSelected = selected;
 
             Reset();
         }
