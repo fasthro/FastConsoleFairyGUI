@@ -1,43 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1136,640" overflow="hidden" opaque="false" designImage="ui://n5bjuvogku63h" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
+  <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
+  <controller name="window" pages="0,正常,1,最小化" selected="1">
+    <action type="play_transition" fromPage="0" toPage="1" transition="minimize"/>
+    <action type="play_transition" fromPage="1" toPage="0" transition="maximize"/>
+  </controller>
   <displayList>
     <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640">
+      <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
-    </component>
-    <component id="n2_ku63" name="clear_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="0,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku63a"/>
-    </component>
-    <component id="n3_ku63" name="collapse_btn" src="ku63y" fileName="component/Icon复选按钮.xml" xy="142,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku639"/>
-    </component>
-    <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="284,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button checked="true" icon="ui://n5bjuvogku636"/>
-    </component>
-    <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="426,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button checked="true" icon="ui://n5bjuvogku63e"/>
-    </component>
-    <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="568,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button checked="true" icon="ui://n5bjuvogku638"/>
-    </component>
-    <component id="n19_ku63" name="logcat_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="710,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku63z"/>
-    </component>
-    <component id="n23_ku63" name="setting_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="852,1" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku6313"/>
-    </component>
-    <component id="n7_ku63" name="hide_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="994,0" size="142,32">
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku6315"/>
-    </component>
-    <component id="n21_ku63" name="fliter_com" src="ku6310" fileName="component/过滤输入组件.xml" xy="1,35" size="1134,32">
-      <relation target="" sidePair="width-width,top-top"/>
     </component>
     <list id="n8_ku63" name="list" xy="1,70" size="1134,532" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
       <relation target="" sidePair="width-width,height-height"/>
@@ -64,8 +35,80 @@
       <item/>
       <item/>
     </list>
-    <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,606" size="1134,32">
+    <component id="n2_ku63" name="clear_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="0,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku63a"/>
+    </component>
+    <component id="n3_ku63" name="collapse_btn" src="ku63y" fileName="component/Icon复选按钮.xml" xy="142,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku639"/>
+    </component>
+    <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="284,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button checked="true" icon="ui://n5bjuvogku636"/>
+    </component>
+    <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="426,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button checked="true" icon="ui://n5bjuvogku63e"/>
+    </component>
+    <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="568,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button checked="true" icon="ui://n5bjuvogku638"/>
+    </component>
+    <component id="n19_ku63" name="logcat_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="710,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku63z"/>
+    </component>
+    <component id="n23_ku63" name="setting_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="852,1" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku6313"/>
+    </component>
+    <component id="n7_ku63" name="hide_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="994,0" size="142,32" group="n24_jk93">
+      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="top-top"/>
+      <Button icon="ui://n5bjuvogku6315"/>
+    </component>
+    <component id="n21_ku63" name="fliter_com" src="ku6310" fileName="component/过滤输入组件.xml" xy="1,35" size="1134,32" group="n24_jk93">
+      <relation target="" sidePair="width-width,top-top"/>
+    </component>
+    <group id="n24_jk93" name="top_maximize" xy="0,0" size="1136,67" advanced="true" collapsed="true"/>
+    <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,606" size="1134,32" group="n25_jk93">
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </component>
+    <component id="n29_jk93" name="minimize_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n25_jk93">
+      <gearDisplay controller="window" pages="0"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button icon="ui://n5bjuvogjk932e"/>
+    </component>
+    <group id="n25_jk93" name="bottom_maximize" xy="1,606" size="1134,32" advanced="true"/>
+    <component id="n27_jk93" name="maximize_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n28_jk93">
+      <gearDisplay controller="window" pages="1"/>
+      <relation target="" sidePair="right-right,bottom-bottom"/>
+      <Button icon="ui://n5bjuvogjk932d"/>
+    </component>
+    <group id="n28_jk93" name="bottom_minimize" xy="1099,606" size="32,32" advanced="true"/>
   </displayList>
+  <transition name="minimize">
+    <item time="0" type="XY" target="n24_jk93" tween="true" startValue="0,0" endValue="0,-70" duration="12" ease="Linear"/>
+    <item time="0" type="XY" target="n25_jk93" tween="true" startValue="1,606" endValue="1,644" duration="12" ease="Linear"/>
+    <item time="0" type="XY" target="n28_jk93" value="1099,645"/>
+    <item time="12" type="XY" target="n28_jk93" tween="true" startValue="1099,645" endValue="1099,606" duration="6" ease="Linear"/>
+    <item time="18" type="XY" target="n24_jk93" value="0,-70"/>
+    <item time="18" type="XY" target="n25_jk93" value="1,644"/>
+  </transition>
+  <transition name="maximize">
+    <item time="0" type="XY" target="n24_jk93" value="0,-70"/>
+    <item time="0" type="XY" target="n25_jk93" value="1,644"/>
+    <item time="0" type="XY" target="n28_jk93" tween="true" startValue="1099,606" endValue="1099,645" duration="6" ease="Linear"/>
+    <item time="6" type="XY" target="n24_jk93" tween="true" startValue="0,-70" endValue="0,0" duration="12" ease="Linear"/>
+    <item time="6" type="XY" target="n25_jk93" tween="true" startValue="1,644" endValue="1,606" duration="12" ease="Linear"/>
+    <item time="18" type="XY" target="n28_jk93" value="1099,645"/>
+  </transition>
 </component>

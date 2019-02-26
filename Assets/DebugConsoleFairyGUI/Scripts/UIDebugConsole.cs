@@ -32,6 +32,17 @@ namespace DebugConsoleFairyGUI
         private GButton m_hideBtn;
         private GButton m_settingBtn;
 
+        private GButton m_maximizeBtn;
+        private GButton m_minmizeBtn;
+        
+        private GComponent m_bgCom;
+
+        private Controller m_transparentController;
+        private Controller m_fliterTransparentController;
+        private Controller m_cmdTransparentController;
+        private Controller m_listScrllBarTransparentController;
+
+        private Controller m_windowController;
         #endregion
 
         // 是否列表保持在最下面
@@ -54,6 +65,11 @@ namespace DebugConsoleFairyGUI
 
         protected override void OnShown()
         {
+            m_bgCom = contentPane.GetChild("bg").asCom;
+
+            m_windowController = contentPane.GetController("window");
+            m_windowController.SetSelectedIndex(0);
+
             m_list = contentPane.GetChild("list").asList;
             m_list.RemoveChildrenToPool();
             m_list.SetVirtual();
@@ -95,6 +111,31 @@ namespace DebugConsoleFairyGUI
             m_hideBtn = contentPane.GetChild("hide_btn").asButton;
             m_hideBtn.onClick.Set(OckClose);
             SetBtnSize(m_hideBtn, bw, 8);
+
+            // max
+            m_maximizeBtn = contentPane.GetChild("maximize_btn").asButton;
+            m_maximizeBtn.onClick.Set(OckMaxmize);
+
+            // min
+            m_minmizeBtn = contentPane.GetChild("minimize_btn").asButton;
+            m_minmizeBtn.onClick.Set(OckMinmize);
+
+            
+
+            // fliter
+            var filterCom = contentPane.GetChild("fliter_com").asCom;
+
+            // fliter
+            var cmdCom = contentPane.GetChild("cmd_com").asCom;
+
+            // 透明模式控制
+            m_transparentController = contentPane.GetController("transparent");
+            m_fliterTransparentController = filterCom.GetController("transparent");
+            m_cmdTransparentController = cmdCom.GetController("transparent");
+            m_listScrllBarTransparentController = m_list.scrollPane.vtScrollBar.GetController("transparent");
+
+            // 刷新设置
+            RefreshSetting();
         }
 
         // 设置功能按钮Size
@@ -113,6 +154,7 @@ namespace DebugConsoleFairyGUI
             var typeController = item.GetController("type");
             var groupController = item.GetController("group");
             var selectedController = item.GetController("selected");
+            var transparentController = item.GetController("transparent");
 
             var contentText = item.GetChild("content_text").asRichTextField;
             var countText = item.GetChild("count_text").asTextField;
@@ -163,6 +205,16 @@ namespace DebugConsoleFairyGUI
                 selectedController.SetSelectedIndex(0);
             }
 
+            // transparent
+            if (manager.settingConfig.transparent)
+            {
+                transparentController.SetSelectedIndex(1);
+            }
+            else
+            {
+                transparentController.SetSelectedIndex(0);
+            }
+
             // count
             if (data.logCount > 999)
             {
@@ -173,7 +225,7 @@ namespace DebugConsoleFairyGUI
                 countText.text = data.logCount.ToString();
             }
 
-            if (!manager.settingConfig.singleShow && data.selected)
+            if (!manager.settingConfig.single && data.selected)
             {
                 contentText.autoSize = AutoSizeType.Height;
                 contentText.text = data.ToString();
@@ -204,7 +256,7 @@ namespace DebugConsoleFairyGUI
             LogEntry data = item.data as LogEntry;
 
             // 显示日志详情界面
-            if (manager.settingConfig.singleShow)
+            if (manager.settingConfig.single)
             {
                 if (m_detailUI == null)
                 {
@@ -265,6 +317,32 @@ namespace DebugConsoleFairyGUI
             m_errorBtn.title = manager.errorCount.ToString();
         }
 
+        public void RefreshSetting()
+        {
+            // 透明设置
+            if (manager.settingConfig.transparent)
+            {
+                m_transparentController.SetSelectedIndex(1);
+                m_fliterTransparentController.SetSelectedIndex(1);
+                m_cmdTransparentController.SetSelectedIndex(1);
+                m_listScrllBarTransparentController.SetSelectedIndex(1);
+            }
+            else
+            {
+                m_transparentController.SetSelectedIndex(0);
+                m_fliterTransparentController.SetSelectedIndex(0);
+                m_cmdTransparentController.SetSelectedIndex(0);
+                m_listScrllBarTransparentController.SetSelectedIndex(0);
+            }
+
+            // 穿透设置
+            var touchable = !manager.settingConfig.touch;
+            m_list.touchable = touchable;
+            m_bgCom.touchable = touchable;
+
+            Refresh();
+        }
+
         // 重置
         private void Reset()
         {
@@ -308,18 +386,28 @@ namespace DebugConsoleFairyGUI
 
         private void OckLogcat()
         {
-
+            m_windowController.SetSelectedIndex(1);
         }
 
         private void OckSetting()
         {
-            if(m_settingUI == null)
+            if (m_settingUI == null)
             {
                 m_settingUI = new UIDebugConsoleSetting(manager);
             }
             m_settingUI.Show();
         }
 
+        private void OckMaxmize()
+        {
+           m_windowController.SetSelectedIndex(0);
+        }
+
+        private void OckMinmize()
+        {
+           m_windowController.SetSelectedIndex(1);
+        }
+        
         private void OckClose()
         {
 

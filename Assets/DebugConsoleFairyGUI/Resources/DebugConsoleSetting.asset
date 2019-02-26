@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cbcc326dcaee64cb35014fd663dbe7, type: 3}
   m_Name: DebugConsoleSetting
   m_EditorClassIdentifier: 
-  singleShow: 0
-  receivedLogcat: 0
+  transparent: 1
+  single: 0
+  logcat: 0

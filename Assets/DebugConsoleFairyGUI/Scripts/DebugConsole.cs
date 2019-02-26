@@ -22,7 +22,8 @@ namespace DebugConsoleFairyGUI
         private static DebugConsole instance = null;
 
         // 主界面
-        private UIDebugConsole m_mainUI;
+         [HideInInspector]
+        public UIDebugConsole mainUI;
 
         // 设置配置
         [HideInInspector]
@@ -126,8 +127,8 @@ namespace DebugConsoleFairyGUI
             settingConfig = Resources.Load("DebugConsoleSetting") as DebugConsoleSetting;
 
             // 创建主UI
-            m_mainUI = new UIDebugConsole(this);
-            m_mainUI.Show();
+            mainUI = new UIDebugConsole(this);
+            mainUI.Show();
         }
 
         private float temp = 0;
@@ -161,7 +162,7 @@ namespace DebugConsoleFairyGUI
 
             SetReceivedLog(logEntry);
 
-            m_mainUI.Refresh();
+            mainUI.Refresh();
         }
 
         // 设置log
@@ -255,7 +256,7 @@ namespace DebugConsoleFairyGUI
                 SetReceivedLog(logEntrys[i]);
             }
 
-            m_mainUI.Refresh();
+            mainUI.Refresh();
         }
 
         // 清理Log
@@ -263,7 +264,7 @@ namespace DebugConsoleFairyGUI
         {
             logEntrys.Clear();
             Reset();
-            m_mainUI.Refresh();
+            mainUI.Refresh();
         }
 
         // 设置收缩

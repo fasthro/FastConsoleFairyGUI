@@ -12,9 +12,13 @@ namespace DebugConsoleFairyGUI
     [System.Serializable]
     public class DebugConsoleSetting : ScriptableObject
     {
+        // 开启透明模式
+        public bool transparent;
+        // 开启穿透点击模式
+        public bool touch;
         // 单一条条目选中显示日志详情
-        public bool singleShow;
+        public bool single;
         // 接收Logcat日志
-        public bool receivedLogcat;
+        public bool logcat;
     }
 }
