@@ -31,9 +31,11 @@ namespace DebugConsoleFairyGUI
         {
             m_singleShowBtn = contentPane.GetChild("single_show_btn").asButton;
             m_singleShowBtn.onClick.Set(OckSingle);
+            m_singleShowBtn.selected = manager.settingConfig.singleShow;
 
             m_logcatBtn = contentPane.GetChild("logcat_btn").asButton;
             m_logcatBtn.onClick.Set(OckLogcat);
+            m_logcatBtn.selected = manager.settingConfig.receivedLogcat;
 
             m_btnClose = contentPane.GetChild("title").asCom.GetChild("close_btn").asButton;
             m_btnClose.onClick.Set(OckClose);
@@ -44,13 +46,13 @@ namespace DebugConsoleFairyGUI
         // 设置单独界面展示日志详情
         private void OckSingle()
         {
-            manager.singleShow = m_singleShowBtn.selected;
+            manager.settingConfig.singleShow = m_singleShowBtn.selected;
         }
 
         // 设置接收Logcat日志
         private void OckLogcat()
         {
-            manager.receivedLogcat = m_logcatBtn.selected;
+            manager.settingConfig.receivedLogcat = m_logcatBtn.selected;
         }
 
         private void OckClose()

@@ -21,7 +21,12 @@ namespace DebugConsoleFairyGUI
     {
         private static DebugConsole instance = null;
 
+        // 主界面
         private UIDebugConsole m_mainUI;
+
+        // 设置配置
+        [HideInInspector]
+        public DebugConsoleSetting settingConfig;
 
         #region 列表数据
 
@@ -87,17 +92,6 @@ namespace DebugConsoleFairyGUI
 
         #endregion
 
-        #region setting
-        // 单一条条目选中显示日志详情
-        [HideInInspector]
-        public bool singleShow = false;
-
-        // 接收Logcat日志
-        [HideInInspector]
-        public bool receivedLogcat = false;
-        
-        #endregion
-
         void OnEnable()
         {
             Application.logMessageReceived -= ReceivedLog;
@@ -128,6 +122,9 @@ namespace DebugConsoleFairyGUI
 
         private void Start()
         {
+            // 初始化配置
+            settingConfig = Resources.Load("DebugConsoleSetting") as DebugConsoleSetting;
+
             // 创建主UI
             m_mainUI = new UIDebugConsole(this);
             m_mainUI.Show();
@@ -137,7 +134,7 @@ namespace DebugConsoleFairyGUI
         private void Update()
         {
             temp += Time.deltaTime;
-            if (temp > 1.0f)
+            if (temp > 0.1f)
             {
                 var ran = Random.Range(1, 5);
                 if (ran == 1)

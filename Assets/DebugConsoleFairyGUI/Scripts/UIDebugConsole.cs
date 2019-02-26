@@ -173,7 +173,7 @@ namespace DebugConsoleFairyGUI
                 countText.text = data.logCount.ToString();
             }
 
-            if (!manager.singleShow && data.selected)
+            if (!manager.settingConfig.singleShow && data.selected)
             {
                 contentText.autoSize = AutoSizeType.Height;
                 contentText.text = data.ToString();
@@ -204,7 +204,7 @@ namespace DebugConsoleFairyGUI
             LogEntry data = item.data as LogEntry;
 
             // 显示日志详情界面
-            if (manager.singleShow)
+            if (manager.settingConfig.singleShow)
             {
                 if (m_detailUI == null)
                 {
