@@ -11,6 +11,7 @@ namespace DebugConsoleFairyGUI
         private DebugConsole manager;
 
         #region component
+        private GButton m_minimizeBtn;
         private GButton m_transparentBtn;
         private GButton m_touchBtn;
         private GButton m_singleShowBtn;
@@ -31,6 +32,10 @@ namespace DebugConsoleFairyGUI
 
         protected override void OnShown()
         {
+            m_minimizeBtn = contentPane.GetChild("minimize_btn").asButton;
+            m_minimizeBtn.onClick.Set(OckMinimize);
+            m_minimizeBtn.selected = manager.settingConfig.defaultMinimize;
+            
             m_transparentBtn = contentPane.GetChild("transparent_btn").asButton;
             m_transparentBtn.onClick.Set(OckTransparent);
             m_transparentBtn.selected = manager.settingConfig.transparent;
@@ -49,6 +54,12 @@ namespace DebugConsoleFairyGUI
 
             m_btnClose = contentPane.GetChild("title").asCom.GetChild("close_btn").asButton;
             m_btnClose.onClick.Set(OckClose);
+        }
+
+        // 默认界面最小化显示
+        private void OckMinimize()
+        {
+            manager.settingConfig.defaultMinimize = m_minimizeBtn.selected;
         }
 
         // 透明模式

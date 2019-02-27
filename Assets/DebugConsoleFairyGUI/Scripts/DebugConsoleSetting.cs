@@ -12,6 +12,8 @@ namespace DebugConsoleFairyGUI
     [System.Serializable]
     public class DebugConsoleSetting : ScriptableObject
     {
+        // 默认最小化显示界面
+        public bool defaultMinimize;
         // 开启透明模式
         public bool transparent;
         // 开启穿透点击模式

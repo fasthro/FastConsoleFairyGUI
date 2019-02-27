@@ -21,8 +21,13 @@ namespace DebugConsoleFairyGUI
         private UIDebugConsoleSetting m_settingUI;
 
         #region component
+        // 背景组件
+        private GComponent m_bgCom;
 
+        // 日志列表
         private GList m_list;
+
+        // 功能按钮
         private GButton m_clearBtn;
         private GButton m_collapsedBtn;
         private GButton m_infoBtn;
@@ -32,26 +37,40 @@ namespace DebugConsoleFairyGUI
         private GButton m_hideBtn;
         private GButton m_settingBtn;
 
+        // 菜单操作按钮
         private GButton m_menuShowBtn;
         private GButton m_menuHideBtn;
 
+        // 过滤组件
         private GTextInput m_filterInput;
+        // 命令组件
         private GTextInput m_cmdInput;
 
-        private GComponent m_bgCom;
-
-        private Controller m_transparentController;
-        private Controller m_fliterTransparentController;
-        private Controller m_cmdTransparentController;
-        private Controller m_listScrllBarTransparentController;
-
+        // 最小化组件
+        private GComponent m_minCom;
+        private GTextField m_minInfoCountText;
+        private GTextField m_minWarnCountText;
+        private GTextField m_minErrorCountText;
         private Controller m_windowController;
+
+        // 透明控制器
+        private Controller m_tpController;
+        private Controller m_tpFliterController;
+        private Controller m_tpCmdController;
+        private Controller m_tpScrllBarController;
+        private Controller m_tpMinimizeController;
+
+        // 菜单控制器
+        private Controller m_menuController;
+
         #endregion
 
         // 是否列表保持在最下面
-        private bool m_keepBottom;
-        // 当前选中的数据
-        private LogEntry selectedData;
+        private bool m_listKeepDown;
+        // 当前选中列表条目数据
+        private LogEntry selectedEntryData;
+        // 当前显示状态为最大化正常显示
+        private bool m_maximizeShow;
 
         public UIDebugConsole(DebugConsole mgr)
         {
@@ -63,23 +82,35 @@ namespace DebugConsoleFairyGUI
             contentPane = UIPackage.CreateObject(LogConst.UI_PACKAGE_NAME, "panel").asCom;
             contentPane.SetSize(GRoot.inst.width, GRoot.inst.height);
 
-            m_keepBottom = true;
+            m_listKeepDown = true;
         }
 
         protected override void OnShown()
         {
             m_bgCom = contentPane.GetChild("bg").asCom;
 
-            m_windowController = contentPane.GetController("menu");
-            m_windowController.SetSelectedIndex(0);
+            m_windowController = contentPane.GetController("window");
+            if (manager.settingConfig.defaultMinimize)
+            {
+                m_maximizeShow = false;
+                m_windowController.SetSelectedIndex(1);
+            }
+            else
+            {
+                m_maximizeShow = true;
+                m_windowController.SetSelectedIndex(0);
+            }
+
+            m_menuController = contentPane.GetController("menu");
+            m_menuController.SetSelectedIndex(0);
 
             m_list = contentPane.GetChild("list").asList;
             m_list.RemoveChildrenToPool();
             m_list.SetVirtual();
             m_list.itemRenderer = ItemRenderer;
             m_list.onClickItem.Set(OckClickItem);
-            m_list.onTouchBegin.Set(OnTouchBegin);
-            m_list.scrollPane.onPullUpRelease.Set(OnPullUpRelease);
+            m_list.onTouchBegin.Set(OnListTouchBegin);
+            m_list.scrollPane.onPullUpRelease.Set(OnListPullUpRelease);
 
             var bw = GRoot.inst.width / 8;
 
@@ -132,14 +163,80 @@ namespace DebugConsoleFairyGUI
             var cmdCom = contentPane.GetChild("cmd_com").asCom;
             m_cmdInput = cmdCom.GetChild("input_text").asTextInput;
 
+            // 最小化
+            m_minCom = contentPane.GetChild("minimize_com").asCom;
+            m_minCom.draggable = true;
+            m_minCom.dragBounds = new Rect(0, 0, GRoot.inst.width, GRoot.inst.height);
+            m_minCom.onClick.Set(OckMinimizeCom);
+
+            m_tpMinimizeController = m_minCom.GetController("transparent");
+
+            m_minInfoCountText = m_minCom.GetChild("info_text").asTextField;
+            m_minWarnCountText = m_minCom.GetChild("warn_text").asTextField;
+            m_minErrorCountText = m_minCom.GetChild("error_text").asTextField;
+
             // 透明模式控制
-            m_transparentController = contentPane.GetController("transparent");
-            m_fliterTransparentController = filterCom.GetController("transparent");
-            m_cmdTransparentController = cmdCom.GetController("transparent");
-            m_listScrllBarTransparentController = m_list.scrollPane.vtScrollBar.GetController("transparent");
+            m_tpController = contentPane.GetController("transparent");
+            m_tpFliterController = filterCom.GetController("transparent");
+            m_tpCmdController = cmdCom.GetController("transparent");
+            m_tpScrllBarController = m_list.scrollPane.vtScrollBar.GetController("transparent");
 
             // 刷新设置
             RefreshSetting();
+        }
+
+        public void Refresh()
+        {
+            // count
+            var infoCount = manager.infoCount.ToString();
+            var warnCount = manager.warnCount.ToString();
+            var errorCount = manager.errorCount.ToString();
+
+            // 最大化的时候才更新列表显示
+            if (m_maximizeShow)
+            {
+                m_list.numItems = manager.logShowEntrys.Count;
+                if (m_listKeepDown)
+                {
+                    m_list.scrollPane.ScrollBottom();
+                }
+
+                m_infoBtn.title = infoCount;
+                m_warnBtn.title = warnCount;
+                m_errorBtn.title = errorCount;
+            }
+
+            m_minInfoCountText.text = infoCount;
+            m_minWarnCountText.text = warnCount;
+            m_minErrorCountText.text = errorCount;
+        }
+
+        public void RefreshSetting()
+        {
+            // 透明设置
+            if (manager.settingConfig.transparent)
+            {
+                m_tpController.SetSelectedIndex(1);
+                m_tpFliterController.SetSelectedIndex(1);
+                m_tpCmdController.SetSelectedIndex(1);
+                m_tpScrllBarController.SetSelectedIndex(1);
+                m_tpMinimizeController.SetSelectedIndex(1);
+            }
+            else
+            {
+                m_tpController.SetSelectedIndex(0);
+                m_tpFliterController.SetSelectedIndex(0);
+                m_tpCmdController.SetSelectedIndex(0);
+                m_tpScrllBarController.SetSelectedIndex(0);
+                m_tpMinimizeController.SetSelectedIndex(0);
+            }
+
+            // 穿透设置
+            var touchable = !manager.settingConfig.touch;
+            m_list.touchable = touchable;
+            m_bgCom.touchable = touchable;
+
+            Refresh();
         }
 
         // 设置功能按钮Size
@@ -147,6 +244,12 @@ namespace DebugConsoleFairyGUI
         {
             button.width = width;
             button.x = width * (index - 1);
+        }
+
+        // 重置
+        private void Reset()
+        {
+            selectedEntryData = null;
         }
 
         private void ItemRenderer(int index, GObject obj)
@@ -276,17 +379,17 @@ namespace DebugConsoleFairyGUI
             }
 
             // 选中状态设置
-            if (selectedData != null)
+            if (selectedEntryData != null)
             {
-                selectedData.selected = false;
+                selectedEntryData.selected = false;
             }
-            selectedData = data;
-            selectedData.selected = true;
+            selectedEntryData = data;
+            selectedEntryData.selected = true;
 
             Refresh();
 
             // 取消列表自动向下显示
-            m_keepBottom = false;
+            m_listKeepDown = false;
         }
 
         private void OckClickItemCopy(EventContext context)
@@ -297,60 +400,14 @@ namespace DebugConsoleFairyGUI
             // TODO COPY
         }
 
-        private void OnTouchBegin()
+        private void OnListTouchBegin()
         {
-            m_keepBottom = false;
+            m_listKeepDown = false;
         }
 
-        private void OnPullUpRelease()
+        private void OnListPullUpRelease()
         {
-            m_keepBottom = true;
-        }
-
-        public void Refresh()
-        {
-            m_list.numItems = manager.logShowEntrys.Count;
-            if (m_keepBottom)
-            {
-                m_list.scrollPane.ScrollBottom();
-            }
-
-            // count
-            m_infoBtn.title = manager.infoCount.ToString();
-            m_warnBtn.title = manager.warnCount.ToString();
-            m_errorBtn.title = manager.errorCount.ToString();
-        }
-
-        public void RefreshSetting()
-        {
-            // 透明设置
-            if (manager.settingConfig.transparent)
-            {
-                m_transparentController.SetSelectedIndex(1);
-                m_fliterTransparentController.SetSelectedIndex(1);
-                m_cmdTransparentController.SetSelectedIndex(1);
-                m_listScrllBarTransparentController.SetSelectedIndex(1);
-            }
-            else
-            {
-                m_transparentController.SetSelectedIndex(0);
-                m_fliterTransparentController.SetSelectedIndex(0);
-                m_cmdTransparentController.SetSelectedIndex(0);
-                m_listScrllBarTransparentController.SetSelectedIndex(0);
-            }
-
-            // 穿透设置
-            var touchable = !manager.settingConfig.touch;
-            m_list.touchable = touchable;
-            m_bgCom.touchable = touchable;
-
-            Refresh();
-        }
-
-        // 重置
-        private void Reset()
-        {
-            selectedData = null;
+            m_listKeepDown = true;
         }
 
         private void OnFilterChange()
@@ -397,7 +454,7 @@ namespace DebugConsoleFairyGUI
 
         private void OckLogcat()
         {
-            m_windowController.SetSelectedIndex(1);
+
         }
 
         private void OckSetting()
@@ -411,17 +468,25 @@ namespace DebugConsoleFairyGUI
 
         private void OckMenuShow()
         {
-            m_windowController.SetSelectedIndex(0);
+            m_menuController.SetSelectedIndex(0);
         }
 
         private void OckMenuHide()
         {
-            m_windowController.SetSelectedIndex(1);
+            m_menuController.SetSelectedIndex(1);
+        }
+
+        private void OckMinimizeCom()
+        {
+            m_windowController.SetSelectedIndex(0);
+            m_maximizeShow = true;
+            Refresh();
         }
 
         private void OckClose()
         {
-
+            m_maximizeShow = false;
+            m_windowController.SetSelectedIndex(1);
         }
     }
 }

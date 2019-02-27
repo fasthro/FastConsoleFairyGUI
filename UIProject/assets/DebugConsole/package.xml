@@ -46,6 +46,8 @@
     <component id="puz52b" name="空白组件.xml" path="/component/"/>
     <image id="jk932d" name="Icon最大化.png" path="/image/"/>
     <image id="jk932e" name="Icon最小化.png" path="/image/"/>
+    <component id="bs5m2f" name="背景圆角遮罩.xml" path="/component/"/>
+    <component id="bs5m2g" name="minimize_com.xml" path="/component/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>

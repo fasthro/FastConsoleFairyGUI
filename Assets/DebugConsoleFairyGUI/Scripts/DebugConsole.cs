@@ -148,15 +148,15 @@ namespace DebugConsoleFairyGUI
                 var ran = Random.Range(1, 5);
                 if (ran == 1)
                 {
-                    Debug.Log("日\n志\n输\n出 : " + ran);
+                    //Debug.Log("日\n志\n输\n出 : " + ran);
                 }
                 else if (ran == 3)
                 {
-                    Debug.LogWarning("日志输出 : " + ran);
+                    //Debug.LogWarning("日志输出 : " + ran);
                 }
                 else
                 {
-                    Debug.LogError("日志输出 : " + ran);
+                    //Debug.LogError("日志输出 : " + ran);
                 }
                 temp = 0;
             }
@@ -205,7 +205,7 @@ namespace DebugConsoleFairyGUI
                 if (!sameEntryAllDic.ContainsKey(logEntry))
                 {
                     sameEntryAllDic.Add(logEntry, true);
-                    
+
                     SetCount(logEntry);
                 }
             }

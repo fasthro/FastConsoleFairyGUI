@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1136,640" overflow="hidden" opaque="false" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
   <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
-  <controller name="menu" pages="0,正常,1,最小化" selected="0">
+  <controller name="menu" pages="0,菜单显示,1,菜单隐藏" selected="0">
     <action type="play_transition" fromPage="0" toPage="1" transition="menu_hide"/>
     <action type="play_transition" fromPage="1" toPage="0" transition="menu_show"/>
   </controller>
+  <controller name="window" pages="0,最大化,1,最小化" selected="0"/>
   <displayList>
+    <component id="n38_bs5m" name="minimize_com" src="bs5m2g" fileName="component/minimize_com.xml" xy="0,0" group="n39_bs5m"/>
+    <group id="n39_bs5m" name="minimize_group" xy="0,0" size="100,100" advanced="true">
+      <gearDisplay controller="window" pages="1"/>
+    </group>
     <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640" group="n30_bs5m">
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
@@ -95,7 +100,9 @@
       <Button icon="ui://n5bjuvogjk932d"/>
     </component>
     <group id="n28_jk93" name="bottom_menu" xy="1099,606" size="32,32" group="n30_bs5m" advanced="true"/>
-    <group id="n30_bs5m" name="main_group" xy="0,0" size="1136,640" advanced="true"/>
+    <group id="n30_bs5m" name="main_group" xy="0,0" size="1136,640" advanced="true" collapsed="true">
+      <gearDisplay controller="window" pages="0"/>
+    </group>
   </displayList>
   <transition name="menu_hide">
     <item time="0" type="XY" target="n24_jk93" tween="true" startValue="0,0" endValue="0,-70" duration="12" ease="Linear"/>
