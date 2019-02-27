@@ -10,7 +10,7 @@
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="middle-middle,left-left"/>
     </image>
-    <text id="n2_ku63" name="input_text" xy="66,4" size="1965,53" input="true" prompt="Filter Tag" fontSize="24" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
+    <text id="n2_ku63" name="input_text" xy="66,4" size="1965,53" input="true" prompt="Filter" fontSize="24" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
       <relation target="" sidePair="width-width,height-height"/>
     </text>
   </displayList>

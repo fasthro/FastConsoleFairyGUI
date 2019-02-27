@@ -124,14 +124,17 @@ namespace DebugConsoleFairyGUI
 
             m_infoBtn = contentPane.GetChild("info_btn").asButton;
             m_infoBtn.onClick.Set(OckInfo);
+            m_infoBtn.selected = true;
             SetBtnSize(m_infoBtn, bw, 3);
 
             m_warnBtn = contentPane.GetChild("warn_btn").asButton;
             m_warnBtn.onClick.Set(OckWarn);
+            m_warnBtn.selected = true;
             SetBtnSize(m_warnBtn, bw, 4);
 
             m_errorBtn = contentPane.GetChild("error_btn").asButton;
             m_errorBtn.onClick.Set(OckError);
+            m_errorBtn.selected = true;
             SetBtnSize(m_errorBtn, bw, 5);
 
             m_logcatgBtn = contentPane.GetChild("logcat_btn").asButton;

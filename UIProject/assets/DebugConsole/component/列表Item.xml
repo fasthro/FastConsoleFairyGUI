@@ -27,7 +27,7 @@
       <gearDisplay controller="type" pages="1"/>
     </image>
     <image id="n5_irtl" name="count_img" src="irtl1g" fileName="image/圆圈.png" xy="1037,-2" group="n7_irtl" color="#20201d"/>
-    <text id="n6_irtl" name="count_text" xy="1066,18" pivot="0.5,0.5" size="10,27" group="n7_irtl" fontSize="20" color="#a7a7a7" align="center" vAlign="middle" text=""/>
+    <text id="n6_irtl" name="count_text" xy="1065,18" pivot="0.5,0.5" size="10,27" group="n7_irtl" fontSize="20" color="#a7a7a7" align="center" vAlign="middle" text=""/>
     <group id="n7_irtl" name="count_group" xy="1037,-2" size="64,64" advanced="true">
       <gearDisplay controller="group" pages="0"/>
       <relation target="" sidePair="top-top,right-right"/>
