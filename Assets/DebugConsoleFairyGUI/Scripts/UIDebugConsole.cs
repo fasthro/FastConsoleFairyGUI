@@ -32,8 +32,8 @@ namespace DebugConsoleFairyGUI
         private GButton m_hideBtn;
         private GButton m_settingBtn;
 
-        private GButton m_maximizeBtn;
-        private GButton m_minmizeBtn;
+        private GButton m_menuShowBtn;
+        private GButton m_menuHideBtn;
 
         private GTextInput m_filterInput;
         private GTextInput m_cmdInput;
@@ -70,7 +70,7 @@ namespace DebugConsoleFairyGUI
         {
             m_bgCom = contentPane.GetChild("bg").asCom;
 
-            m_windowController = contentPane.GetController("window");
+            m_windowController = contentPane.GetController("menu");
             m_windowController.SetSelectedIndex(0);
 
             m_list = contentPane.GetChild("list").asList;
@@ -115,13 +115,13 @@ namespace DebugConsoleFairyGUI
             m_hideBtn.onClick.Set(OckClose);
             SetBtnSize(m_hideBtn, bw, 8);
 
-            // max
-            m_maximizeBtn = contentPane.GetChild("maximize_btn").asButton;
-            m_maximizeBtn.onClick.Set(OckMaxmize);
+            // show menu
+            m_menuShowBtn = contentPane.GetChild("menu_show_btn").asButton;
+            m_menuShowBtn.onClick.Set(OckMenuShow);
 
-            // min
-            m_minmizeBtn = contentPane.GetChild("minimize_btn").asButton;
-            m_minmizeBtn.onClick.Set(OckMinmize);
+            // hide menu
+            m_menuHideBtn = contentPane.GetChild("menu_hide_btn").asButton;
+            m_menuHideBtn.onClick.Set(OckMenuHide);
 
             // fliter
             var filterCom = contentPane.GetChild("fliter_com").asCom;
@@ -356,7 +356,7 @@ namespace DebugConsoleFairyGUI
         private void OnFilterChange()
         {
             Reset();
-            
+
             manager.SetFilter(m_filterInput.text);
         }
 
@@ -409,12 +409,12 @@ namespace DebugConsoleFairyGUI
             m_settingUI.Show();
         }
 
-        private void OckMaxmize()
+        private void OckMenuShow()
         {
             m_windowController.SetSelectedIndex(0);
         }
 
-        private void OckMinmize()
+        private void OckMenuHide()
         {
             m_windowController.SetSelectedIndex(1);
         }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1136,640" overflow="hidden" opaque="false" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
   <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
-  <controller name="window" pages="0,正常,1,最小化" selected="0">
-    <action type="play_transition" fromPage="0" toPage="1" transition="minimize"/>
-    <action type="play_transition" fromPage="1" toPage="0" transition="maximize"/>
+  <controller name="menu" pages="0,正常,1,最小化" selected="0">
+    <action type="play_transition" fromPage="0" toPage="1" transition="menu_hide"/>
+    <action type="play_transition" fromPage="1" toPage="0" transition="menu_show"/>
   </controller>
   <displayList>
-    <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640">
+    <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640" group="n30_bs5m">
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <list id="n8_ku63" name="list" xy="1,70" size="1134,532" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
+    <list id="n8_ku63" name="list" xy="1,70" size="1134,532" group="n30_bs5m" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
       <relation target="" sidePair="width-width,bottomext-bottom"/>
       <relation target="n21_ku63" sidePair="topext-bottom"/>
       <item/>
@@ -79,24 +79,25 @@
     <component id="n21_ku63" name="fliter_com" src="ku6310" fileName="component/过滤输入组件.xml" xy="1,35" size="1134,32" group="n24_jk93">
       <relation target="" sidePair="width-width,top-top"/>
     </component>
-    <group id="n24_jk93" name="top_maximize" xy="0,0" size="1136,67" advanced="true" collapsed="true"/>
+    <group id="n24_jk93" name="top_menu" xy="0,0" size="1136,67" group="n30_bs5m" advanced="true" collapsed="true"/>
     <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,606" size="1134,32" group="n25_jk93">
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </component>
-    <component id="n29_jk93" name="minimize_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n25_jk93">
-      <gearDisplay controller="window" pages="0"/>
+    <component id="n29_jk93" name="menu_hide_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n25_jk93">
+      <gearDisplay controller="menu" pages="0"/>
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button icon="ui://n5bjuvogjk932e"/>
     </component>
-    <group id="n25_jk93" name="bottom_maximize" xy="1,606" size="1134,32" advanced="true"/>
-    <component id="n27_jk93" name="maximize_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n28_jk93">
-      <gearDisplay controller="window" pages="1"/>
+    <group id="n25_jk93" name="bottom_cmd" xy="1,606" size="1134,32" group="n30_bs5m" advanced="true"/>
+    <component id="n27_jk93" name="menu_show_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1099,606" group="n28_jk93">
+      <gearDisplay controller="menu" pages="1"/>
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button icon="ui://n5bjuvogjk932d"/>
     </component>
-    <group id="n28_jk93" name="bottom_minimize" xy="1099,606" size="32,32" advanced="true"/>
+    <group id="n28_jk93" name="bottom_menu" xy="1099,606" size="32,32" group="n30_bs5m" advanced="true"/>
+    <group id="n30_bs5m" name="main_group" xy="0,0" size="1136,640" advanced="true"/>
   </displayList>
-  <transition name="minimize">
+  <transition name="menu_hide">
     <item time="0" type="XY" target="n24_jk93" tween="true" startValue="0,0" endValue="0,-70" duration="12" ease="Linear"/>
     <item time="0" type="XY" target="n25_jk93" tween="true" startValue="1,606" endValue="1,644" duration="12" ease="Linear"/>
     <item time="0" type="XY" target="n28_jk93" value="1099,645"/>
@@ -104,7 +105,7 @@
     <item time="18" type="XY" target="n24_jk93" value="0,-70"/>
     <item time="18" type="XY" target="n25_jk93" value="1,644"/>
   </transition>
-  <transition name="maximize">
+  <transition name="menu_show">
     <item time="0" type="XY" target="n24_jk93" value="0,-70"/>
     <item time="0" type="XY" target="n25_jk93" value="1,644"/>
     <item time="0" type="XY" target="n28_jk93" tween="true" startValue="1099,606" endValue="1099,645" duration="6" ease="Linear"/>
