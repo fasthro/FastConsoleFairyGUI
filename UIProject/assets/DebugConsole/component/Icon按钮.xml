@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="162,32" extention="Button">
+<component size="162,60" extention="Button">
   <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
   <displayList>
-    <image id="n0_ku63" name="n0" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="162,32" color="#20201d">
+    <image id="n0_ku63" name="n0" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="162,60" color="#20201d">
       <gearDisplay controller="button" pages="0,2"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n1_ku63" name="n1" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="162,32" color="#4d4d4d">
+    <image id="n1_ku63" name="n1" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="162,60" color="#4d4d4d">
       <gearDisplay controller="button" pages="1,3"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <loader id="n2_ku63" name="icon" xy="68,4" size="24,24" align="center" vAlign="middle" fill="scaleFree">
+    <loader id="n2_ku63" name="icon" xy="65,14" size="32,32" align="center" vAlign="middle" fill="scaleFree">
       <relation target="" sidePair="middle-middle,center-center"/>
     </loader>
   </displayList>

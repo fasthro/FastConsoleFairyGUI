@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1078,545">
   <displayList>
-    <richtext id="n0_nrdq" name="content_text" xy="0,0" size="1075,27" fontSize="20" color="#a7a7a7" autoSize="height" text="">
+    <richtext id="n0_nrdq" name="content_text" xy="0,0" size="1075,35" fontSize="26" color="#a7a7a7" autoSize="height" text="">
       <relation target="" sidePair="width-width"/>
     </richtext>
   </displayList>

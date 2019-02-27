@@ -123,12 +123,6 @@ namespace DebugConsoleFairyGUI
             Application.logMessageReceived -= ReceivedLog;
         }
 
-        private void Awake()
-        {
-            // 设置UI分辨率
-            GRoot.inst.SetContentScaleFactor(1136, 640, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
-        }
-
         private void Start()
         {
             // 初始化配置
@@ -137,29 +131,6 @@ namespace DebugConsoleFairyGUI
             // 创建主UI
             mainUI = new UIDebugConsole(this);
             mainUI.Show();
-        }
-
-        private float temp = 0;
-        private void Update()
-        {
-            temp += Time.deltaTime;
-            if (temp > 0.1f)
-            {
-                var ran = Random.Range(1, 5);
-                if (ran == 1)
-                {
-                    //Debug.Log("日\n志\n输\n出 : " + ran);
-                }
-                else if (ran == 3)
-                {
-                    //Debug.LogWarning("日志输出 : " + ran);
-                }
-                else
-                {
-                    //Debug.LogError("日志输出 : " + ran);
-                }
-                temp = 0;
-            }
         }
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)

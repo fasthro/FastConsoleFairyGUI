@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="100,100">
-  <controller name="transparent" pages="0,正常,1,透明" selected="1"/>
+<component size="150,150">
+  <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
   <displayList>
-    <component id="n0_bs5m" name="bg" src="bs5m2f" fileName="component/背景圆角遮罩.xml" xy="0,0" size="100,100" alpha="0.2">
+    <component id="n0_bs5m" name="bg" src="bs5m2f" fileName="component/背景圆角遮罩.xml" xy="0,0" size="150,150">
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <image id="n1_bs5m" name="info_img" src="ku636" fileName="image/IconInfo.png" xy="4,10" size="24,24"/>
-    <image id="n2_bs5m" name="error_img" src="ku638" fileName="image/IconError.png" xy="4,64" size="24,24"/>
-    <image id="n3_bs5m" name="warn_img" src="ku63e" fileName="image/IconWarning.png" xy="4,37" size="24,24"/>
-    <text id="n4_bs5m" name="info_text" xy="31,12" size="61,19" fontSize="18" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
-    <text id="n5_bs5m" name="warn_text" xy="31,39" size="61,19" fontSize="18" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
-    <text id="n6_bs5m" name="error_text" xy="31,66" size="61,19" fontSize="18" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <image id="n1_bs5m" name="info_img" src="ku636" fileName="image/IconInfo.png" xy="5,13"/>
+    <image id="n2_bs5m" name="error_img" src="ku638" fileName="image/IconError.png" xy="5,105"/>
+    <image id="n3_bs5m" name="warn_img" src="ku63e" fileName="image/IconWarning.png" xy="5,59"/>
+    <text id="n4_bs5m" name="info_text" xy="41,12" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <text id="n5_bs5m" name="warn_text" xy="41,58" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <text id="n6_bs5m" name="error_text" xy="41,104" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
   </displayList>
 </component>

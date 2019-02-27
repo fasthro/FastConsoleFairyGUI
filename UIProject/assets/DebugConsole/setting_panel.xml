@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1136,640">
+<component size="2048,1152">
   <displayList>
-    <component id="n3_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="1136,640">
+    <component id="n3_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="2048,1152">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="0,0" size="1136,60">
+    <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="0,0" size="2048,60">
       <relation target="" sidePair="top-top,width-width"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>
-    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,286" size="1100,68">
+    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,286" size="2012,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="单独界面展示日志详情"/>
     </component>
-    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,216" size="1100,68">
+    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,216" size="2012,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="穿透模式"/>
     </component>
-    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,146" size="1100,68">
+    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,146" size="2012,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="透明模式"/>
     </component>
-    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,76" size="1100,68">
+    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,76" size="2012,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="默认界面最小化模式"/>
     </component>
-    <component id="n22_bs5m" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,356" size="1100,68">
+    <component id="n22_bs5m" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,356" size="2012,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="接受Logcat日志"/>
     </component>

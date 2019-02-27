@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1100,39">
+<component size="1100,60">
   <controller name="color" pages="0,深色,1,浅色" selected="0"/>
   <controller name="type" pages="0,info,1,warn,2,error" selected="0"/>
   <controller name="group" pages="0,有数量,1,无数量" selected="0"/>
-  <controller name="selected" pages="0,未选中,1,选中" selected="1"/>
-  <controller name="transparent" pages="0,正常,1,透明" selected="1"/>
+  <controller name="selected" pages="0,未选中,1,选中" selected="0"/>
+  <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
   <displayList>
-    <image id="n0_ku63" name="bg" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="1100,39" alpha="0" color="#373737">
+    <image id="n0_ku63" name="bg" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="1100,60" color="#373737">
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <gearColor controller="color" pages="0,1" values="#373737|#3c3c3c"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n8_e6fi" name="select_img" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="1100,39" alpha="0.2" color="#2b4657">
+    <image id="n8_e6fi" name="select_img" src="ku63v" fileName="image/白色底图.png" xy="0,0" size="1100,60" color="#2b4657">
       <gearDisplay controller="selected" pages="1"/>
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <richtext id="n1_ku63" name="content_text" xy="39,7" size="1011,25" fontSize="18" color="#a7a7a7" vAlign="middle" autoSize="none" text=""/>
-    <image id="n2_ku63" name="icon_error_img" src="ku638" fileName="image/IconError.png" xy="12,7" size="24,24">
+    <richtext id="n1_ku63" name="content_text" xy="60,14" size="979,31" fontSize="24" color="#a7a7a7" vAlign="middle" autoSize="none" text=""/>
+    <image id="n2_ku63" name="icon_error_img" src="ku638" fileName="image/IconError.png" xy="12,14">
       <gearDisplay controller="type" pages="2"/>
     </image>
-    <image id="n3_ku63" name="icon_info_img" src="ku636" fileName="image/IconInfo.png" xy="12,7" size="24,24">
+    <image id="n3_ku63" name="icon_info_img" src="ku636" fileName="image/IconInfo.png" xy="19,14">
       <gearDisplay controller="type" pages="0"/>
     </image>
-    <image id="n4_ku63" name="icon_warn_img" src="ku63e" fileName="image/IconWarning.png" xy="12,7" size="24,24">
+    <image id="n4_ku63" name="icon_warn_img" src="ku63e" fileName="image/IconWarning.png" xy="12,14">
       <gearDisplay controller="type" pages="1"/>
     </image>
-    <image id="n5_irtl" name="count_img" src="irtl1g" fileName="image/圆圈.png" xy="1055,-2" size="44,44" group="n7_irtl" color="#20201d"/>
-    <text id="n6_irtl" name="count_text" xy="1073,11" pivot="0.5,0.5" size="10,20" group="n7_irtl" fontSize="14" color="#a7a7a7" align="center" vAlign="middle" text=""/>
-    <group id="n7_irtl" name="count_group" xy="1055,-2" size="44,44" advanced="true">
+    <image id="n5_irtl" name="count_img" src="irtl1g" fileName="image/圆圈.png" xy="1037,-2" group="n7_irtl" color="#20201d"/>
+    <text id="n6_irtl" name="count_text" xy="1066,18" pivot="0.5,0.5" size="10,27" group="n7_irtl" fontSize="20" color="#a7a7a7" align="center" vAlign="middle" text=""/>
+    <group id="n7_irtl" name="count_group" xy="1037,-2" size="64,64" advanced="true">
       <gearDisplay controller="group" pages="0"/>
       <relation target="" sidePair="top-top,right-right"/>
     </group>
-    <component id="n11_puz5" name="btn_copy" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1061,3">
+    <component id="n11_puz5" name="btn_copy" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1045,6">
       <relation target="" sidePair="right-right,bottom-bottom"/>
       <Button icon="ui://n5bjuvognrdq20"/>
     </component>
