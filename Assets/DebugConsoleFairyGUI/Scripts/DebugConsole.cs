@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
+using System.Text.RegularExpressions;
 
 namespace DebugConsoleFairyGUI
 {
@@ -22,7 +23,7 @@ namespace DebugConsoleFairyGUI
         private static DebugConsole instance = null;
 
         // 主界面
-         [HideInInspector]
+        [HideInInspector]
         public UIDebugConsole mainUI;
 
         // 设置配置
@@ -36,6 +37,12 @@ namespace DebugConsoleFairyGUI
 
         // 合并字典<日志条目,在logShowEntrys列表中的索引>
         private Dictionary<LogEntry, int> sameEntryDic;
+
+        // 合并所有条目字典<日志条目,在logShowEntrys列表中的索引>
+        private Dictionary<LogEntry, bool> sameEntryAllDic;
+
+        // 过滤字符串
+        private string m_filter;
 
         // UI当前显示的列表
         [HideInInspector]
@@ -107,6 +114,7 @@ namespace DebugConsoleFairyGUI
                 logEntrys = new List<LogEntry>(128);
                 logShowEntrys = new List<LogEntry>(128);
                 sameEntryDic = new Dictionary<LogEntry, int>(128);
+                sameEntryAllDic = new Dictionary<LogEntry, bool>(128);
             }
         }
 
@@ -156,7 +164,7 @@ namespace DebugConsoleFairyGUI
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)
         {
-            LogEntry logEntry = new LogEntry(GetTag(logString), logString, stackTrace, LogTypeToDebugLogType(logType));
+            LogEntry logEntry = new LogEntry(logString, stackTrace, ULTToDLT(logType));
 
             logEntrys.Add(logEntry);
 
@@ -170,7 +178,7 @@ namespace DebugConsoleFairyGUI
         {
             if (!m_collapsed)
             {
-                if (GetSelectedRule(logEntry))
+                if (FilterRule(logEntry))
                 {
                     logShowEntrys.Add(logEntry);
                 }
@@ -186,25 +194,25 @@ namespace DebugConsoleFairyGUI
                 }
                 else
                 {
-                    if (GetSelectedRule(logEntry))
+                    if (FilterRule(logEntry))
                     {
                         sameEntryDic.Add(logEntry, logShowEntrys.Count);
+
                         logShowEntrys.Add(logEntry);
                     }
+                }
 
+                if (!sameEntryAllDic.ContainsKey(logEntry))
+                {
+                    sameEntryAllDic.Add(logEntry, true);
+                    
                     SetCount(logEntry);
                 }
             }
         }
 
-        // 获取LogTag
-        private string GetTag(string logContent)
-        {
-            return "DebugConsole";
-        }
-
         // Unity LogType to DebugLogType
-        private DebugLogType LogTypeToDebugLogType(LogType logType)
+        private DebugLogType ULTToDLT(LogType logType)
         {
             if (logType == LogType.Log)
                 return DebugLogType.Log;
@@ -213,13 +221,21 @@ namespace DebugConsoleFairyGUI
             return DebugLogType.Error;
         }
 
-        // 获取选择的规则
-        private bool GetSelectedRule(LogEntry entry)
+        // 日志过滤规则
+        private bool FilterRule(LogEntry entry)
         {
             if ((m_infoSelected && entry.logType == DebugLogType.Log)
             || (m_warnSelected && entry.logType == DebugLogType.Warning)
             || (m_errorSelected && entry.logType == DebugLogType.Error))
+            {
+                if (!string.IsNullOrEmpty(m_filter))
+                {
+                    Regex rgx = new Regex(m_filter);
+                    Match match = rgx.Match(entry.logContent);
+                    return match.Success;
+                }
                 return true;
+            }
             return false;
         }
 
@@ -249,6 +265,7 @@ namespace DebugConsoleFairyGUI
 
             logShowEntrys.Clear();
             sameEntryDic.Clear();
+            sameEntryAllDic.Clear();
 
             for (int i = 0; i < logEntrys.Count; i++)
             {
@@ -298,6 +315,32 @@ namespace DebugConsoleFairyGUI
 
             Reset();
         }
+
+        // 设置过滤内容
+        public void SetFilter(string filter)
+        {
+            this.m_filter = filter;
+
+            Reset();
+        }
+
+        #region 日志输出函数
+        public static void Log(object message)
+        {
+            Debug.Log(message);
+        }
+
+        public static void LogWarning(object message)
+        {
+            Debug.LogWarning(message);
+        }
+
+        public static void LogError(object message)
+        {
+            Debug.LogError(message);
+        }
+
+        #endregion
     }
 }
 

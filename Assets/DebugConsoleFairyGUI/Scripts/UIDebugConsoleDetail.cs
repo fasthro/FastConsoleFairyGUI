@@ -19,7 +19,6 @@ namespace DebugConsoleFairyGUI
         private GComponent m_listItem;
 
         private Controller m_typeController;
-        private GTextField m_tagText;
 
         protected override void OnInit()
         {
@@ -41,7 +40,6 @@ namespace DebugConsoleFairyGUI
             m_list.AddChild(m_listItem);
 
             m_typeController = contentPane.GetController("type");
-            m_tagText = contentPane.GetChild("tag_text").asTextField;
         }
 
         public void Refresh(LogEntry logEntry)
@@ -58,8 +56,6 @@ namespace DebugConsoleFairyGUI
             {
                 m_typeController.SetSelectedIndex(2);
             }
-
-            m_tagText.text = logEntry.logTag;
 
             var content_text = m_listItem.GetChild("content_text").asRichTextField;
             content_text.text = logEntry.ToString();

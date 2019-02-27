@@ -12,8 +12,6 @@ namespace DebugConsoleFairyGUI
 {
     public class LogEntry : IEquatable<LogEntry>
     {
-        // 日志tag
-        public string logTag;
 		// 日志类型
 		public DebugLogType logType;
         // 日志内容
@@ -33,9 +31,8 @@ namespace DebugConsoleFairyGUI
         // tostring content
         private string m_content;
 
-        public LogEntry(string logTag, string logContent, string stackContent, DebugLogType logType)
+        public LogEntry(string logContent, string stackContent, DebugLogType logType)
         {
-            this.logTag = logTag;
             this.logContent = logContent;
             this.stackContent = stackContent;
             this.logType = logType;

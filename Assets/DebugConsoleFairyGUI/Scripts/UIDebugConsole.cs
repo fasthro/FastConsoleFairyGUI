@@ -34,7 +34,10 @@ namespace DebugConsoleFairyGUI
 
         private GButton m_maximizeBtn;
         private GButton m_minmizeBtn;
-        
+
+        private GTextInput m_filterInput;
+        private GTextInput m_cmdInput;
+
         private GComponent m_bgCom;
 
         private Controller m_transparentController;
@@ -120,13 +123,14 @@ namespace DebugConsoleFairyGUI
             m_minmizeBtn = contentPane.GetChild("minimize_btn").asButton;
             m_minmizeBtn.onClick.Set(OckMinmize);
 
-            
-
             // fliter
             var filterCom = contentPane.GetChild("fliter_com").asCom;
+            m_filterInput = filterCom.GetChild("input_text").asTextInput;
+            m_filterInput.onChanged.Set(OnFilterChange);
 
-            // fliter
+            // cmd
             var cmdCom = contentPane.GetChild("cmd_com").asCom;
+            m_cmdInput = cmdCom.GetChild("input_text").asTextInput;
 
             // 透明模式控制
             m_transparentController = contentPane.GetController("transparent");
@@ -349,6 +353,13 @@ namespace DebugConsoleFairyGUI
             selectedData = null;
         }
 
+        private void OnFilterChange()
+        {
+            Reset();
+            
+            manager.SetFilter(m_filterInput.text);
+        }
+
         private void OckClear()
         {
             Reset();
@@ -400,14 +411,14 @@ namespace DebugConsoleFairyGUI
 
         private void OckMaxmize()
         {
-           m_windowController.SetSelectedIndex(0);
+            m_windowController.SetSelectedIndex(0);
         }
 
         private void OckMinmize()
         {
-           m_windowController.SetSelectedIndex(1);
+            m_windowController.SetSelectedIndex(1);
         }
-        
+
         private void OckClose()
         {
 

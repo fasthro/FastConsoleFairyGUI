@@ -17,7 +17,6 @@
     <image id="n53_nrdq" name="warn_img" src="ku63e" fileName="image/IconWarning.png" xy="28,42" size="24,24">
       <gearDisplay controller="type" pages="1"/>
     </image>
-    <text id="n51_nrdq" name="tag_text" xy="57,42" size="10,25" fontSize="18" color="#ffffff" vAlign="middle" bold="true" text=""/>
     <list id="n46_nrdq" name="list" xy="29,77" size="1078,508" overflow="scroll" defaultItem="ui://n5bjuvognrdq22">
       <relation target="" sidePair="width-width,height-height"/>
       <item/>

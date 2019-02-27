@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<component size="1136,640" overflow="hidden" opaque="false" designImage="ui://n5bjuvogku63h" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
+<component size="1136,640" overflow="hidden" opaque="false" designImageAlpha="0" bgColor="#2e2e29" adaptationTest="FitSize">
   <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
-  <controller name="window" pages="0,正常,1,最小化" selected="1">
+  <controller name="window" pages="0,正常,1,最小化" selected="0">
     <action type="play_transition" fromPage="0" toPage="1" transition="minimize"/>
     <action type="play_transition" fromPage="1" toPage="0" transition="maximize"/>
   </controller>
@@ -11,7 +11,8 @@
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <list id="n8_ku63" name="list" xy="1,70" size="1134,532" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
-      <relation target="" sidePair="width-width,height-height"/>
+      <relation target="" sidePair="width-width,bottomext-bottom"/>
+      <relation target="n21_ku63" sidePair="topext-bottom"/>
       <item/>
       <item/>
       <item/>

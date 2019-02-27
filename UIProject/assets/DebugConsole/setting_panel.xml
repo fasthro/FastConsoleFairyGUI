@@ -5,6 +5,7 @@
       <relation target="" sidePair="width-width,height-height"/>
     </component>
     <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="0,0" size="1136,60">
+      <relation target="" sidePair="top-top,width-width"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>
     <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,216" size="1100,68">
