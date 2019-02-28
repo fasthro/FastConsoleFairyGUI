@@ -36,7 +36,6 @@
     <image id="nrdq20" name="IconCopy.png" path="/image/"/>
     <component id="nrdq21" name="detail_panel.xml" path="/" exported="true"/>
     <component id="nrdq22" name="detail_item.xml" path="/component/"/>
-    <image id="nrdq23" name="blue_button.png" path="/image/"/>
     <image id="puz524" name="开关2.png" path="/image/"/>
     <image id="puz525" name="开关1.png" path="/image/"/>
     <component id="puz526" name="开关按钮.xml" path="/component/"/>
@@ -48,6 +47,9 @@
     <image id="jk932e" name="Icon最小化.png" path="/image/"/>
     <component id="bs5m2f" name="背景圆角遮罩.xml" path="/component/"/>
     <component id="bs5m2g" name="minimize_com.xml" path="/component/"/>
+    <image id="bs5m2v" name="选择.png" path="/image/"/>
+    <component id="bs5m2w" name="颜色选择按钮.xml" path="/component/"/>
+    <component id="iwd62x" name="color_item.xml" path="/component/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>

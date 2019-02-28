@@ -8,25 +8,42 @@
       <relation target="" sidePair="top-top,width-width"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>
-    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,286" size="2012,68">
+    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,339" size="1988,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="单独界面展示日志详情"/>
     </component>
-    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,216" size="2012,68">
+    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,268" size="1988,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="穿透模式"/>
     </component>
-    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,146" size="2012,68">
+    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,126" size="1988,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="透明模式"/>
     </component>
-    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,76" size="2012,68">
+    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,197" size="1988,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="默认界面最小化模式"/>
     </component>
-    <component id="n22_bs5m" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="18,356" size="2012,68">
+    <component id="n22_bs5m" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,750" size="1988,68">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="接受Logcat日志"/>
     </component>
+    <component id="n24_bs5m" name="subtitle_1" src="ku631d" fileName="component/副标题组件.xml" xy="30,73" size="1988,50">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="界面基础设置"/>
+    </component>
+    <component id="n23_bs5m" name="subtitle_2" src="ku631d" fileName="component/副标题组件.xml" xy="30,467" size="1988,50">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="列表颜色设置"/>
+    </component>
+    <component id="n25_bs5m" name="subtitle_3" src="ku631d" fileName="component/副标题组件.xml" xy="30,697" size="1988,50">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="Logcat设置"/>
+    </component>
+    <list id="n66_iwd6" name="color_list" xy="45,539" size="1962,102" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://n5bjuvogiwd62x">
+      <relation target="n23_bs5m" sidePair="top-top"/>
+      <relation target="" sidePair="width-width"/>
+      <item/>
+    </list>
   </displayList>
 </component>

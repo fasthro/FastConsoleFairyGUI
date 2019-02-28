@@ -66,7 +66,7 @@ namespace DebugConsoleFairyGUI
         #endregion
 
         // 是否列表保持在最下面
-        private bool m_listKeepDown;
+        private bool m_listKeepDown = true;
         // 当前选中列表条目数据
         private LogEntry selectedEntryData;
         // 当前显示状态为最大化正常显示
@@ -80,9 +80,10 @@ namespace DebugConsoleFairyGUI
         protected override void OnInit()
         {
             contentPane = UIPackage.CreateObject(LogConst.UI_PACKAGE_NAME, "panel").asCom;
-            contentPane.SetSize(GRoot.inst.width, GRoot.inst.height);
-
-            m_listKeepDown = true;
+            Debug.Log(GRoot.inst.width + "  " + GRoot.inst.height);
+            contentPane.MakeFullScreen();
+            sortingOrder = manager.sortingOrder;
+            gameObjectName = "Window - DebugConsole";
         }
 
         protected override void OnShown()
@@ -190,6 +191,9 @@ namespace DebugConsoleFairyGUI
 
         public void Refresh()
         {
+            if(!isShowing)
+                return;
+
             // count
             var infoCount = manager.infoCount.ToString();
             var warnCount = manager.warnCount.ToString();
@@ -216,6 +220,9 @@ namespace DebugConsoleFairyGUI
 
         public void RefreshSetting()
         {
+            if(!isShowing)
+                return;
+                
             // 透明设置
             if (manager.settingConfig.transparent)
             {
@@ -357,6 +364,9 @@ namespace DebugConsoleFairyGUI
                 item.height = item.initHeight;
             }
 
+            // 字体颜色设置
+            contentText.color = manager.settingConfig.listFontColor;
+
             item.data = data;
         }
 
@@ -370,7 +380,7 @@ namespace DebugConsoleFairyGUI
             {
                 if (m_detailUI == null)
                 {
-                    m_detailUI = new UIDebugConsoleDetail();
+                    m_detailUI = new UIDebugConsoleDetail(manager);
                     m_detailUI.Show();
                     m_detailUI.Refresh(data);
                 }

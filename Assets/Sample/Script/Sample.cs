@@ -7,13 +7,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DebugConsoleFairyGUI;
+using FairyGUI;
 
 public class Sample : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-
+        GRoot.inst.SetContentScaleFactor(2048, 1152, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
     }
 
     private float temp = 0;

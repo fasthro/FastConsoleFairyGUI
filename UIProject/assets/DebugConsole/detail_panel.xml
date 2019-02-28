@@ -21,7 +21,7 @@
       <relation target="" sidePair="width-width,height-height"/>
       <item/>
     </list>
-    <component id="n48_nrdq" name="copy_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1911,1087" size="48,48">
+    <component id="n48_nrdq" name="copy_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1891,1087" size="48,48">
       <relation target="n46_nrdq" sidePair="right-right,bottom-bottom"/>
       <Button icon="ui://n5bjuvognrdq20"/>
     </component>

@@ -22,6 +22,9 @@ namespace DebugConsoleFairyGUI
     {
         private static DebugConsole instance = null;
 
+        // UI渲染层级
+        public int sortingOrder = int.MaxValue;
+
         // 主界面
         [HideInInspector]
         public UIDebugConsole mainUI;
@@ -107,6 +110,9 @@ namespace DebugConsoleFairyGUI
 
             if (instance == null)
             {
+                instance = this;
+                DontDestroyOnLoad(this);
+
                 // 添加UI包
                 UIPackage.AddPackage(LogConst.UI_PACKAGE_PATH);
 
@@ -127,6 +133,8 @@ namespace DebugConsoleFairyGUI
         {
             // 初始化配置
             settingConfig = Resources.Load("DebugConsoleSetting") as DebugConsoleSetting;
+            // 列表字体颜色设置
+            settingConfig.listFontColor = DebugConsoleSetting.LIST_FONT_COLOR[settingConfig.listFontColorIndex];
 
             // 创建主UI
             mainUI = new UIDebugConsole(this);

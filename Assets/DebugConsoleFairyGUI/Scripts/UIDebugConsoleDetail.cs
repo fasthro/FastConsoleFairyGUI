@@ -12,6 +12,10 @@ namespace DebugConsoleFairyGUI
 {
     public class UIDebugConsoleDetail : Window
     {
+        // DebugConsole 实例
+        private DebugConsole manager;
+
+        #region component
         private GButton m_copyBtn;
         private GButton m_closeBtn;
 
@@ -19,11 +23,20 @@ namespace DebugConsoleFairyGUI
         private GComponent m_listItem;
 
         private Controller m_typeController;
+        
+        #endregion
+
+        public UIDebugConsoleDetail(DebugConsole mgr)
+        {
+            manager = mgr;
+        }
 
         protected override void OnInit()
         {
             contentPane = UIPackage.CreateObject(LogConst.UI_PACKAGE_NAME, "detail_panel").asCom;
-            contentPane.SetSize(GRoot.inst.width, GRoot.inst.height);
+            contentPane.MakeFullScreen();
+            sortingOrder = manager.sortingOrder;
+            gameObjectName = "Window - DebugConsoleDetail";
         }
 
         protected override void OnShown()

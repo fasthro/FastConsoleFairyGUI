@@ -9,8 +9,8 @@
     <image id="n1_bs5m" name="info_img" src="ku636" fileName="image/IconInfo.png" xy="5,13"/>
     <image id="n2_bs5m" name="error_img" src="ku638" fileName="image/IconError.png" xy="5,105"/>
     <image id="n3_bs5m" name="warn_img" src="ku63e" fileName="image/IconWarning.png" xy="5,59"/>
-    <text id="n4_bs5m" name="info_text" xy="41,12" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
-    <text id="n5_bs5m" name="warn_text" xy="41,58" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
-    <text id="n6_bs5m" name="error_text" xy="41,104" size="96,33" fontSize="24" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <text id="n4_bs5m" name="info_text" xy="41,10" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <text id="n5_bs5m" name="warn_text" xy="41,56" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <text id="n6_bs5m" name="error_text" xy="41,102" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
   </displayList>
 </component>

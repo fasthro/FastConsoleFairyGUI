@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="1962,102">
+  <displayList>
+    <image id="n29_bs5m" name="color_1" src="ku63v" fileName="image/白色底图.png" xy="3,0" size="100,100" group="n41_bs5m" color="#a7a7a7"/>
+    <image id="n30_bs5m" name="color_2" src="ku63v" fileName="image/白色底图.png" xy="172,0" size="100,100" group="n41_bs5m"/>
+    <image id="n31_bs5m" name="color_3" src="ku63v" fileName="image/白色底图.png" xy="341,0" size="100,100" group="n41_bs5m" color="#ffbd17"/>
+    <image id="n32_bs5m" name="color_4" src="ku63v" fileName="image/白色底图.png" xy="510,0" size="100,100" group="n41_bs5m" color="#f34150"/>
+    <image id="n33_bs5m" name="color_5" src="ku63v" fileName="image/白色底图.png" xy="681,0" size="100,100" group="n41_bs5m" color="#a839ba"/>
+    <image id="n34_bs5m" name="color_6" src="ku63v" fileName="image/白色底图.png" xy="848,0" size="100,100" group="n41_bs5m" color="#ff923a"/>
+    <image id="n35_bs5m" name="color_7" src="ku63v" fileName="image/白色底图.png" xy="1017,0" size="100,100" group="n41_bs5m" color="#02bd5b"/>
+    <image id="n36_bs5m" name="color_8" src="ku63v" fileName="image/白色底图.png" xy="1186,0" size="100,100" group="n41_bs5m" color="#374755"/>
+    <image id="n37_bs5m" name="color_9" src="ku63v" fileName="image/白色底图.png" xy="1355,0" size="100,100" group="n41_bs5m" color="#1f9fc2"/>
+    <image id="n38_bs5m" name="color_10" src="ku63v" fileName="image/白色底图.png" xy="1524,0" size="100,100" group="n41_bs5m" color="#078ce4"/>
+    <image id="n39_bs5m" name="color_11" src="ku63v" fileName="image/白色底图.png" xy="1693,0" size="100,100" group="n41_bs5m" color="#1d1d1d"/>
+    <image id="n40_bs5m" name="color_12" src="ku63v" fileName="image/白色底图.png" xy="1862,0" size="100,100" group="n41_bs5m" color="#02bcbd"/>
+    <component id="n54_bs5m" name="color_btn_1" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1,2" group="n41_bs5m"/>
+    <component id="n55_bs5m" name="color_btn_2" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="171,1" group="n41_bs5m"/>
+    <component id="n56_bs5m" name="color_btn_3" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="340,1" group="n41_bs5m"/>
+    <component id="n57_bs5m" name="color_btn_4" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="508,1" group="n41_bs5m"/>
+    <component id="n58_bs5m" name="color_btn_5" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="679,1" group="n41_bs5m"/>
+    <component id="n59_bs5m" name="color_btn_6" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="846,1" group="n41_bs5m"/>
+    <component id="n60_bs5m" name="color_btn_7" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1016,1" group="n41_bs5m"/>
+    <component id="n61_bs5m" name="color_btn_8" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1184,2" group="n41_bs5m"/>
+    <component id="n62_bs5m" name="color_btn_9" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1354,1" group="n41_bs5m"/>
+    <component id="n63_bs5m" name="color_btn_10" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1523,1" group="n41_bs5m"/>
+    <component id="n64_bs5m" name="color_btn_11" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1691,1" group="n41_bs5m"/>
+    <component id="n65_bs5m" name="color_btn_12" src="bs5m2w" fileName="component/颜色选择按钮.xml" xy="1861,1" group="n41_bs5m"/>
+    <group id="n41_bs5m" name="n41" xy="0,0" size="1961,102" advanced="true">
+      <relation target="" sidePair="top-top,center-center"/>
+    </group>
+  </displayList>
+</component>

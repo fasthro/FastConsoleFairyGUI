@@ -7,11 +7,11 @@
       <relation target="" sidePair="width-width,height-height"/>
     </image>
     <image id="n1_ku63" name="seach_img" src="ku63x" fileName="image/Icon放大镜.png" xy="8,0" size="60,60">
-      <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
+      <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="middle-middle,left-left"/>
     </image>
-    <text id="n2_ku63" name="input_text" xy="66,4" size="1965,53" input="true" prompt="Filter" fontSize="24" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
-      <relation target="" sidePair="width-width,height-height"/>
+    <text id="n2_ku63" name="input_text" xy="66,12" size="1965,37" input="true" prompt="Filter" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
+      <relation target="" sidePair="width-width,middle-middle"/>
     </text>
   </displayList>
 </component>

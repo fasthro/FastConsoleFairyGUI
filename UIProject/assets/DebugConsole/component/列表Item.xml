@@ -16,14 +16,14 @@
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <richtext id="n1_ku63" name="content_text" xy="60,14" size="979,31" fontSize="24" color="#a7a7a7" vAlign="middle" autoSize="none" text=""/>
-    <image id="n2_ku63" name="icon_error_img" src="ku638" fileName="image/IconError.png" xy="12,14">
+    <richtext id="n1_ku63" name="content_text" xy="73,12" size="965,36" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" text=""/>
+    <image id="n2_ku63" name="icon_error_img" src="ku638" fileName="image/IconError.png" xy="19,6" size="48,48">
       <gearDisplay controller="type" pages="2"/>
     </image>
-    <image id="n3_ku63" name="icon_info_img" src="ku636" fileName="image/IconInfo.png" xy="19,14">
+    <image id="n3_ku63" name="icon_info_img" src="ku636" fileName="image/IconInfo.png" xy="19,6" size="48,48">
       <gearDisplay controller="type" pages="0"/>
     </image>
-    <image id="n4_ku63" name="icon_warn_img" src="ku63e" fileName="image/IconWarning.png" xy="12,14">
+    <image id="n4_ku63" name="icon_warn_img" src="ku63e" fileName="image/IconWarning.png" xy="19,6" size="48,48">
       <gearDisplay controller="type" pages="1"/>
     </image>
     <image id="n5_irtl" name="count_img" src="irtl1g" fileName="image/圆圈.png" xy="1037,-2" group="n7_irtl" color="#20201d"/>
