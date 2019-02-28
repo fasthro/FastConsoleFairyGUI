@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: DebugConsoleSetting
   m_EditorClassIdentifier: 
   defaultMinimize: 0
-  transparent: 1
+  transparent: 0
   touch: 0
-  single: 1
+  single: 0
   logcat: 0
-  listFontColorIndex: 2
+  listFontColorIndex: 0
   listFontColor:
     serializedVersion: 2
     rgba: 4279746047

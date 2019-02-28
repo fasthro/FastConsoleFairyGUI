@@ -71,16 +71,18 @@ namespace DebugConsoleFairyGUI
         private LogEntry selectedEntryData;
         // 当前显示状态为最大化正常显示
         private bool m_maximizeShow;
+        // UI是否显示
+        private bool isShow = false;
 
         public UIDebugConsole(DebugConsole mgr)
         {
             manager = mgr;
+            isShow = false;
         }
 
         protected override void OnInit()
         {
             contentPane = UIPackage.CreateObject(LogConst.UI_PACKAGE_NAME, "panel").asCom;
-            Debug.Log(GRoot.inst.width + "  " + GRoot.inst.height);
             contentPane.MakeFullScreen();
             sortingOrder = manager.sortingOrder;
             gameObjectName = "Window - DebugConsole";
@@ -88,6 +90,8 @@ namespace DebugConsoleFairyGUI
 
         protected override void OnShown()
         {
+            isShow = true;
+
             m_bgCom = contentPane.GetChild("bg").asCom;
 
             m_windowController = contentPane.GetController("window");
@@ -189,9 +193,14 @@ namespace DebugConsoleFairyGUI
             RefreshSetting();
         }
 
+        protected override void OnHide()
+        {
+            isShow = false;
+        }
+
         public void Refresh()
         {
-            if(!isShowing)
+            if (!isShow)
                 return;
 
             // count
@@ -220,9 +229,9 @@ namespace DebugConsoleFairyGUI
 
         public void RefreshSetting()
         {
-            if(!isShowing)
+            if (!isShow)
                 return;
-                
+
             // 透明设置
             if (manager.settingConfig.transparent)
             {
