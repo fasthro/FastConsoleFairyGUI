@@ -26,7 +26,7 @@ public class Sample : MonoBehaviour
         // 添加对象方法命令
         DebugConsole.AddCommand("command", "object command", "SampleCommand", typeof(Sample), this);
         // 添加静态方法命令
-        DebugConsole.AddStaticCommand("staticCommand", "object command", "SampleStaticCommand", typeof(Sample));
+        DebugConsole.AddStaticCommand("staticCommand", "static command", "SampleStaticCommand", typeof(Sample));
     }
 
     public void SampleCommand()
