@@ -14,7 +14,7 @@ namespace DebugConsoleFairyGUI
     {
         // DebugConsole 实例
         private DebugConsole manager;
-
+        private LogEntry m_logEntry;
         #region component
         private GButton m_copyBtn;
         private GButton m_closeBtn;
@@ -57,6 +57,7 @@ namespace DebugConsoleFairyGUI
 
         public void Refresh(LogEntry logEntry)
         {
+            m_logEntry = logEntry;
            if (logEntry.logType == DebugLogType.Log)
             {
                 m_typeController.SetSelectedIndex(0);
@@ -93,7 +94,8 @@ namespace DebugConsoleFairyGUI
 
         private void OckCopy()
         {
-
+            Debug.Log("copy -> " + m_logEntry.ToString());
+            DebugConsole.Copy(m_logEntry.ToString());
         }
 
         private void OckClose()

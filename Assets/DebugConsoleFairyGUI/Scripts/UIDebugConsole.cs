@@ -33,7 +33,6 @@ namespace DebugConsoleFairyGUI
         private GButton m_infoBtn;
         private GButton m_warnBtn;
         private GButton m_errorBtn;
-        private GButton m_logcatgBtn;
         private GButton m_hideBtn;
         private GButton m_settingBtn;
 
@@ -45,6 +44,8 @@ namespace DebugConsoleFairyGUI
         private GTextInput m_filterInput;
         // 命令组件
         private GTextInput m_cmdInput;
+        // 命令按钮
+        private GButton m_cmdSendBtn;
 
         // 最小化组件
         private GComponent m_minCom;
@@ -117,7 +118,7 @@ namespace DebugConsoleFairyGUI
             m_list.onTouchBegin.Set(OnListTouchBegin);
             m_list.scrollPane.onPullUpRelease.Set(OnListPullUpRelease);
 
-            var bw = GRoot.inst.width / 8;
+            var bw = GRoot.inst.width / 7;
 
             m_clearBtn = contentPane.GetChild("clear_btn").asButton;
             m_clearBtn.onClick.Set(OckClear);
@@ -142,17 +143,13 @@ namespace DebugConsoleFairyGUI
             m_errorBtn.selected = true;
             SetBtnSize(m_errorBtn, bw, 5);
 
-            m_logcatgBtn = contentPane.GetChild("logcat_btn").asButton;
-            m_logcatgBtn.onClick.Set(OckLogcat);
-            SetBtnSize(m_logcatgBtn, bw, 6);
-
             m_settingBtn = contentPane.GetChild("setting_btn").asButton;
             m_settingBtn.onClick.Set(OckSetting);
-            SetBtnSize(m_settingBtn, bw, 7);
+            SetBtnSize(m_settingBtn, bw, 6);
 
             m_hideBtn = contentPane.GetChild("hide_btn").asButton;
             m_hideBtn.onClick.Set(OckClose);
-            SetBtnSize(m_hideBtn, bw, 8);
+            SetBtnSize(m_hideBtn, bw, 7);
 
             // show menu
             m_menuShowBtn = contentPane.GetChild("menu_show_btn").asButton;
@@ -170,6 +167,11 @@ namespace DebugConsoleFairyGUI
             // cmd
             var cmdCom = contentPane.GetChild("cmd_com").asCom;
             m_cmdInput = cmdCom.GetChild("input_text").asTextInput;
+            m_cmdInput.onChanged.Set(OnCmdChange);
+            m_cmdInput.onKeyDown.Set(OnEnterCmdSend);
+            m_cmdSendBtn = cmdCom.GetChild("send_btn").asButton;
+            m_cmdSendBtn.onClick.Set(OckCmdSend);
+            m_cmdSendBtn.visible = false;
 
             // 最小化
             m_minCom = contentPane.GetChild("minimize_com").asCom;
@@ -403,10 +405,23 @@ namespace DebugConsoleFairyGUI
             // 选中状态设置
             if (selectedEntryData != null)
             {
-                selectedEntryData.selected = false;
+                if (selectedEntryData == data)
+                {
+                    selectedEntryData.selected = !selectedEntryData.selected;
+                }
+                else
+                {
+                    selectedEntryData.selected = false;
+                    data.selected = true;
+                    selectedEntryData = data;
+                }
             }
-            selectedEntryData = data;
-            selectedEntryData.selected = true;
+            else
+            {
+                selectedEntryData = data;
+                selectedEntryData.selected = true;
+            }
+
 
             Refresh();
 
@@ -418,8 +433,7 @@ namespace DebugConsoleFairyGUI
         {
             GComponent item = context.sender as GComponent;
             LogEntry data = item.data as LogEntry;
-
-            // TODO COPY
+            DebugConsole.Copy(data.ToString());
         }
 
         private void OnListTouchBegin()
@@ -474,11 +488,6 @@ namespace DebugConsoleFairyGUI
             manager.SetError(m_errorBtn.selected);
         }
 
-        private void OckLogcat()
-        {
-
-        }
-
         private void OckSetting()
         {
             if (m_settingUI == null)
@@ -503,6 +512,38 @@ namespace DebugConsoleFairyGUI
             m_windowController.SetSelectedIndex(0);
             m_maximizeShow = true;
             Refresh();
+        }
+
+        private void OnCmdChange()
+        {
+            string cmd = m_cmdInput.text;
+            if (string.IsNullOrEmpty(cmd))
+            {
+                m_cmdSendBtn.visible = false;
+            }
+            else
+            {
+                m_cmdSendBtn.visible = true;
+            }
+        }
+
+        private void OnEnterCmdSend()
+        {
+            if(Input.GetKeyDown(KeyCode.KeypadEnter) || Input.GetKeyDown(KeyCode.Return))
+            {
+               OckCmdSend();
+            }
+        }
+
+        private void OckCmdSend()
+        {
+            string cmd = m_cmdInput.text;
+            if (!string.IsNullOrEmpty(cmd))
+            {
+                DebugConsole.ExecuteCommand(cmd);
+            }
+            m_cmdInput.text = "";
+            m_cmdSendBtn.visible = false;
         }
 
         private void OckClose()

@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="1134,60">
-  <controller name="transparent" pages="0,正常,1,透明" selected="1"/>
+  <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
   <displayList>
-    <image id="n0_ku63" name="bg" src="ku63u" fileName="image/白色圆角底图.png" xy="0,0" size="1134,60" alpha="0" color="#20201d">
+    <image id="n0_ku63" name="bg" src="ku63u" fileName="image/白色圆角底图.png" xy="0,0" size="1134,60" color="#20201d">
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <image id="n1_ku63" name="seach_img" src="ku6312" fileName="image/Icon命令.png" xy="15,0" size="60,60" alpha="0.5">
+    <image id="n1_ku63" name="seach_img" src="ku6312" fileName="image/Icon命令.png" xy="15,0" size="60,60">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="middle-middle"/>
     </image>
-    <text id="n2_ku63" name="input_text" xy="76,12" size="996,37" input="true" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
+    <text id="n2_ku63" name="input_text" xy="76,12" size="881,37" input="true" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" bold="true" singleLine="true" text="">
       <relation target="" sidePair="width-width,middle-middle"/>
     </text>
+    <component id="n3_lt4f" name="cmd_list_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="1016,6">
+      <relation target="" sidePair="middle-middle,right-right"/>
+      <Button icon="ui://n5bjuvoglt4f31"/>
+    </component>
+    <component id="n4_lt4f" name="send_btn" src="w29t1h" fileName="component/Icon透明按钮.xml" xy="961,6">
+      <relation target="" sidePair="middle-middle,right-right"/>
+      <Button icon="ui://n5bjuvoglt4f2z"/>
+    </component>
   </displayList>
 </component>

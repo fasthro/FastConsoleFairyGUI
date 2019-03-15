@@ -24,10 +24,6 @@
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="默认界面最小化模式"/>
     </component>
-    <component id="n22_bs5m" name="logcat_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,750" size="1988,68">
-      <relation target="" sidePair="width-width,top-top"/>
-      <Button title="接受Logcat日志"/>
-    </component>
     <component id="n24_bs5m" name="subtitle_1" src="ku631d" fileName="component/副标题组件.xml" xy="30,73" size="1988,50">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="界面基础设置"/>
@@ -35,10 +31,6 @@
     <component id="n23_bs5m" name="subtitle_2" src="ku631d" fileName="component/副标题组件.xml" xy="30,467" size="1988,50">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="列表颜色设置"/>
-    </component>
-    <component id="n25_bs5m" name="subtitle_3" src="ku631d" fileName="component/副标题组件.xml" xy="30,697" size="1988,50">
-      <relation target="" sidePair="width-width,top-top"/>
-      <Button title="Logcat设置"/>
     </component>
     <list id="n66_iwd6" name="color_list" xy="45,539" size="1962,102" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://n5bjuvogiwd62x">
       <relation target="n23_bs5m" sidePair="top-top"/>

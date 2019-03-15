@@ -20,8 +20,6 @@ namespace DebugConsoleFairyGUI
         public bool touch;
         // 单一条条目选中显示日志详情
         public bool single;
-        // 接收Logcat日志
-        public bool logcat;
         // 当前列表字体颜色
         public int listFontColorIndex = 0;
 

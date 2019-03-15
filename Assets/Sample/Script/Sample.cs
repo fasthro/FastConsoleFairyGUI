@@ -17,29 +17,25 @@ public class Sample : MonoBehaviour
         GRoot.inst.SetContentScaleFactor(2048, 1152, UIContentScaler.ScreenMatchMode.MatchWidthOrHeight);
     }
 
-    private float temp = 0;
-    private void Update()
+    void Start()
     {
-        temp += Time.deltaTime;
-        if (temp > 0.1f)
-        {
-            var ran = Random.Range(1, 5);
-            if (ran == 1)
-            {
-                // DebugConsole.Log("");
-                Debug.Log("日\n志\n输\n出 : " + ran);
-            }
-            else if (ran == 3)
-            {
-                // DebugConsole.LogWarning("");
-                Debug.LogWarning("日志输出 : " + ran);
-            }
-            else
-            {
-                // DebugConsole.LogError("");
-                Debug.LogError("日志输出 : " + ran);
-            }
-            temp = 0;
-        }
+        Debug.Log("Sample Log");
+        Debug.LogWarning("Sample LogWarning");
+        Debug.LogError("Sample LogError");
+
+        // 添加对象方法命令
+        DebugConsole.AddCommand("command", "object command", "SampleCommand", typeof(Sample), this);
+        // 添加静态方法命令
+        DebugConsole.AddStaticCommand("staticCommand", "object command", "SampleStaticCommand", typeof(Sample));
+    }
+
+    public void SampleCommand()
+    {
+        Debug.Log("my name is object method command");
+    }
+
+    public static void SampleStaticCommand()
+    {
+        Debug.Log("my name is static method command");
     }
 }

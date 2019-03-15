@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="2048,1152" overflow="hidden" opaque="false" designImageAlpha="0" bgColor="#2e2e29">
-  <controller name="transparent" pages="0,正常,1,透明" selected="1"/>
+  <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
   <controller name="menu" pages="0,菜单显示,1,菜单隐藏" selected="0">
     <action type="play_transition" fromPage="0" toPage="1" transition="menu_hide"/>
     <action type="play_transition" fromPage="1" toPage="0" transition="menu_show"/>
@@ -11,7 +11,7 @@
     <group id="n39_bs5m" name="minimize_group" xy="0,0" size="150,150" advanced="true">
       <gearDisplay controller="window" pages="1"/>
     </group>
-    <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="2048,1152" group="n30_bs5m" alpha="0">
+    <component id="n1_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="2048,1152" group="n30_bs5m">
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
@@ -41,42 +41,37 @@
       <item/>
       <item/>
     </list>
-    <component id="n2_ku63" name="clear_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="0,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n2_ku63" name="clear_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="0,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku63a"/>
     </component>
-    <component id="n3_ku63" name="collapse_btn" src="ku63y" fileName="component/Icon复选按钮.xml" xy="256,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n3_ku63" name="collapse_btn" src="ku63y" fileName="component/Icon复选按钮.xml" xy="292,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku639"/>
     </component>
-    <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="512,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n4_ku63" name="info_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="584,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku636"/>
     </component>
-    <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="768,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n5_ku63" name="warn_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="876,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku63e"/>
     </component>
-    <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="1024,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n6_ku63" name="error_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="1168,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku638"/>
     </component>
-    <component id="n19_ku63" name="logcat_btn" src="ku63k" fileName="component/IconText按钮.xml" xy="1280,1" size="256,60" group="n24_jk93" alpha="0.5">
-      <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
-      <relation target="" sidePair="top-top"/>
-      <Button icon="ui://n5bjuvogku63z"/>
-    </component>
-    <component id="n23_ku63" name="setting_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1536,1" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n23_ku63" name="setting_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1460,1" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>
-    <component id="n7_ku63" name="hide_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1792,0" size="256,60" group="n24_jk93" alpha="0.5">
+    <component id="n7_ku63" name="hide_btn" src="ku63i" fileName="component/Icon按钮.xml" xy="1752,0" size="292,60" group="n24_jk93">
       <gearLook controller="transparent" pages="1" values="0.5,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="top-top"/>
       <Button icon="ui://n5bjuvogku6315"/>
@@ -84,7 +79,7 @@
     <component id="n21_ku63" name="fliter_com" src="ku6310" fileName="component/过滤输入组件.xml" xy="1,65" group="n24_jk93">
       <relation target="" sidePair="width-width,top-top"/>
     </component>
-    <group id="n24_jk93" name="top_menu" xy="0,0" size="2048,125" group="n30_bs5m" advanced="true"/>
+    <group id="n24_jk93" name="top_menu" xy="0,0" size="2047,125" group="n30_bs5m" advanced="true"/>
     <component id="n22_ku63" name="cmd_com" src="ku6311" fileName="component/命令输入组件.xml" xy="1,1092" size="2046,60" group="n25_jk93">
       <relation target="" sidePair="width-width,bottom-bottom"/>
     </component>

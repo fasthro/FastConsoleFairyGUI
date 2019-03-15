@@ -20,7 +20,6 @@
     <image id="ku63v" name="白色底图.png" path="/image/" scale="9grid" scale9grid="16,16,32,32"/>
     <image id="ku63x" name="Icon放大镜.png" path="/image/"/>
     <component id="ku63y" name="Icon复选按钮.xml" path="/component/"/>
-    <image id="ku63z" name="IconLogcat.png" path="/image/"/>
     <component id="ku6310" name="过滤输入组件.xml" path="/component/"/>
     <component id="ku6311" name="命令输入组件.xml" path="/component/"/>
     <image id="ku6312" name="Icon命令.png" path="/image/"/>
@@ -50,6 +49,8 @@
     <image id="bs5m2v" name="选择.png" path="/image/"/>
     <component id="bs5m2w" name="颜色选择按钮.xml" path="/component/"/>
     <component id="iwd62x" name="color_item.xml" path="/component/"/>
+    <image id="lt4f2z" name="发送.png" path="/image/"/>
+    <image id="lt4f31" name="命令列表.png" path="/image/"/>
   </resources>
   <publish name="DebugConsole" path="..\..\DebugConsoleFairyGUI\Assets\DebugConsoleFairyGUI\Resources\DebugConsole" extractAlpha="true">
     <atlas compression="true" index="0"/>

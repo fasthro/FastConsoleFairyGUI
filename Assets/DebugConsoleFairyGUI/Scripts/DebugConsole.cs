@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
 using System.Text.RegularExpressions;
+using System;
 
 namespace DebugConsoleFairyGUI
 {
@@ -24,6 +25,8 @@ namespace DebugConsoleFairyGUI
 
         // UI渲染层级
         public int sortingOrder = int.MaxValue;
+        // android 包名
+        public string packageName = "com.fasthro.debugconsolefairygui";
 
         // 主界面
         [HideInInspector]
@@ -32,6 +35,13 @@ namespace DebugConsoleFairyGUI
         // 设置配置
         [HideInInspector]
         public DebugConsoleSetting settingConfig;
+
+        // Native
+        [HideInInspector]
+        private Native m_native;
+
+        // 命令
+        private Command m_command;
 
         #region 列表数据
 
@@ -121,12 +131,24 @@ namespace DebugConsoleFairyGUI
                 logShowEntrys = new List<LogEntry>(128);
                 sameEntryDic = new Dictionary<LogEntry, int>(128);
                 sameEntryAllDic = new Dictionary<LogEntry, bool>(128);
+
+                // native
+                m_native = new Native();
+                m_native.InitializeAndroid(packageName);
+
+                // 命令
+                m_command = new Command();
             }
         }
 
         private void OnDisable()
         {
             Application.logMessageReceived -= ReceivedLog;
+
+            if(m_native != null){
+                m_native.Release();
+                m_native = null;
+            }
         }
 
         private void Start()
@@ -319,6 +341,46 @@ namespace DebugConsoleFairyGUI
             Debug.LogError(message);
         }
 
+        #endregion
+
+        #region native
+        // copy
+        public static void Copy(string content)
+        {
+            if(instance != null)
+            {
+                instance.m_native.Copy(content);
+            }
+        }
+
+        #endregion
+
+        #region 命令
+        // 执行命令
+        public static void ExecuteCommand(string cmd){
+            if(instance != null)
+            {
+                instance.m_command.Execute(cmd);
+            }
+        }
+
+        // 添加静态命令
+        public static void AddStaticCommand(string cmd, string description, string methodName, Type type)
+        {
+            if(instance != null)
+            {
+                instance.m_command.AddCommand(cmd, description, methodName, type, null);
+            }
+        }
+
+        // 添加对象命令
+        public static void AddCommand(string cmd, string description, string methodName, Type type, object inst)
+        {
+            if(instance != null)
+            {
+                instance.m_command.AddCommand(cmd, description, methodName, type, inst);
+            }
+        }
         #endregion
     }
 }

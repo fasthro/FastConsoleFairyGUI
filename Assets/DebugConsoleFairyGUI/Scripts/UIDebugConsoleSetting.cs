@@ -57,10 +57,6 @@ namespace DebugConsoleFairyGUI
             m_singleShowBtn.onClick.Set(OckSingle);
             m_singleShowBtn.selected = manager.settingConfig.single;
 
-            m_logcatBtn = contentPane.GetChild("logcat_btn").asButton;
-            m_logcatBtn.onClick.Set(OckLogcat);
-            m_logcatBtn.selected = manager.settingConfig.logcat;
-
             m_btnClose = contentPane.GetChild("title").asCom.GetChild("close_btn").asButton;
             m_btnClose.onClick.Set(OckClose);
 
@@ -113,12 +109,6 @@ namespace DebugConsoleFairyGUI
         private void OckSingle()
         {
             manager.settingConfig.single = m_singleShowBtn.selected;
-        }
-
-        // 设置接收Logcat日志
-        private void OckLogcat()
-        {
-            manager.settingConfig.logcat = m_logcatBtn.selected;
         }
 
         // 颜色选择
