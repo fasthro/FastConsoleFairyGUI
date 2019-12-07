@@ -24,7 +24,20 @@ namespace FastConsole
 
     public class FastConsole : MonoBehaviour
     {
-        public static FastConsole inst { get; private set; }
+        private static FastConsole _inst;
+        public static FastConsole inst
+        {
+            get
+            {
+                if (_inst == null)
+                {
+                    GameObject go = new GameObject();
+                    go.name = "FastConsole";
+                    _inst = go.AddComponent<FastConsole>();
+                }
+                return _inst;
+            }
+        }
 
         public FastConsoleNative native { get; private set; }
         public Command command { get; private set; }
@@ -57,13 +70,17 @@ namespace FastConsole
         // 过滤字符串
         private string m_filter;
 
-        void Awake()
+        /// <summary>
+        /// 初始化
+        /// </summary>
+        /// <param name="enabled"></param>
+        public void Initialize(bool enabled)
         {
-            Application.logMessageReceived -= ReceivedLog;
-            Application.logMessageReceived += ReceivedLog;
-
-            inst = this;
+            if (!enabled) return;
             DontDestroyOnLoad(this);
+            // 注册日志监听
+            Application.logMessageReceivedThreaded -= ReceivedLog;
+            Application.logMessageReceivedThreaded += ReceivedLog;
             // log 条目列表
             m_entrys = new List<FastConsoleEntry>(128);
             viewEntrys = new List<FastConsoleEntry>(128);
@@ -80,21 +97,18 @@ namespace FastConsole
             command = new Command();
             // 添加UI包
             UIPackage.AddPackage("FastConsole/FastConsole");
+            // 创建UI
+            mainUI = new UIFastConsole();
+            detailUI = new UIFastConsoleDetail();
+            settingUI = new UIFastConsoleSetting();
+            // 显示主界面
+            mainUI.Show();
         }
 
         void OnDestory()
         {
             Application.logMessageReceived -= ReceivedLog;
-            native.Release();
-        }
-
-        void Start()
-        {
-            mainUI = new UIFastConsole();
-            detailUI = new UIFastConsoleDetail();
-            settingUI = new UIFastConsoleSetting();
-
-            mainUI.Show();
+            if (native != null) native.Release();
         }
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)

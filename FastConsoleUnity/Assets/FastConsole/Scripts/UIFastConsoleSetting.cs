@@ -62,17 +62,16 @@ namespace FastConsole
             m_colorList.RemoveChildrenToPool();
 
             var colorItem = m_colorList.GetFromPool("").asCom;
-            m_colorImage = new GImage[m_maxColorCount];
             m_colorBtn = new GButton[m_maxColorCount];
             for (int i = 0; i < m_maxColorCount; i++)
             {
                 var index = (i + 1).ToString();
-                m_colorImage[i] = colorItem.GetChild("color_" + index).asImage;
+                colorItem.GetChild("color_" + index).asImage.color = FastConsoleSetting.data.fontColor[i];
                 m_colorBtn[i] = colorItem.GetChild("color_btn_" + index).asButton;
                 m_colorBtn[i].data = i;
                 m_colorBtn[i].onClick.Set(OckColor);
 
-                if (FastConsoleSetting.data.colorIndex == i) m_colorBtn[i].selected = true;
+                if (FastConsoleSetting.data.fontColorIndex == i) m_colorBtn[i].selected = true;
                 else m_colorBtn[i].selected = false;
             }
             m_colorList.AddChild(colorItem);
@@ -96,12 +95,12 @@ namespace FastConsole
             var btn = context.sender as GButton;
             var index = (int)btn.data;
 
-            if (FastConsoleSetting.data.colorIndex != index)
+            if (FastConsoleSetting.data.fontColorIndex != index)
             {
-                FastConsoleSetting.data.colorIndex = index;
+                FastConsoleSetting.data.fontColorIndex = index;
                 for (int i = 0; i < m_maxColorCount; i++)
                 {
-                    m_colorBtn[i].selected = FastConsoleSetting.data.colorIndex == i;
+                    m_colorBtn[i].selected = FastConsoleSetting.data.fontColorIndex == i;
                 }
             }
         }

@@ -23,7 +23,7 @@ namespace FastConsole
 
         #region 列表字体颜色
         public Color32 listFontColor { get; set; }
-        public int colorIndex { get; set; }
+        public int fontColorIndex { get; set; }
 
         public Color32[] fontColor = new Color32[]
         {

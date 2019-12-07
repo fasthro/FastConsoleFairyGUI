@@ -15,7 +15,7 @@
       <gearLook controller="transparent" pages="1" values="0,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <list id="n8_ku63" name="list" xy="3,130" size="2046,957" group="n30_bs5m" overflow="scroll" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
+    <list id="n8_ku63" name="list" xy="3,130" size="2046,957" group="n30_bs5m" overflow="scroll" scrollBarFlags="2" scrollBarRes="ui://n5bjuvogku63n," defaultItem="ui://n5bjuvogku63l">
       <relation target="" sidePair="width-width,bottomext-bottom"/>
       <relation target="n21_ku63" sidePair="topext-bottom"/>
       <item/>

@@ -319,7 +319,7 @@ namespace FastConsole
             }
 
             // 字体颜色设置
-            contentText.color = FastConsoleSetting.data.fontColor[FastConsoleSetting.data.colorIndex];
+            contentText.color = FastConsoleSetting.data.fontColor[FastConsoleSetting.data.fontColorIndex];
 
             item.data = data;
         }
