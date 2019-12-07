@@ -10,7 +10,7 @@ using FairyGUI;
 using System.Text.RegularExpressions;
 using System;
 
-namespace FastConsole
+namespace FastConsoleFairyGUI
 {
     /// <summary>
     /// Log Type

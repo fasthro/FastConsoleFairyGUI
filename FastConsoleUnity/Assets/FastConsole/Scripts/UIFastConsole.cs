@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
 
-namespace FastConsole
+namespace FastConsoleFairyGUI
 {
     public class UIFastConsole : Window
     {

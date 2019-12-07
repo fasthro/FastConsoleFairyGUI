@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FastConsole
+namespace FastConsoleFairyGUI
 {
     [System.Serializable]
     public class FastConsoleSetting : ScriptableObject

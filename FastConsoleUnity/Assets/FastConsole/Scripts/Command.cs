@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace FastConsole
+namespace FastConsoleFairyGUI
 {
     public class Command
     {

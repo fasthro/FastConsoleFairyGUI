@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FairyGUI;
 
-namespace FastConsole.Example
+namespace FastConsoleFairyGUI.Example
 {
     public class Example : MonoBehaviour
     {

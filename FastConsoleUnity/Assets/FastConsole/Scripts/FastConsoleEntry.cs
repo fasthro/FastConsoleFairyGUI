@@ -8,7 +8,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace FastConsole
+namespace FastConsoleFairyGUI
 {
     public class FastConsoleEntry : IEquatable<FastConsoleEntry>
     {
