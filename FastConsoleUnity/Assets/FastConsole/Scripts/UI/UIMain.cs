@@ -10,7 +10,7 @@ using FairyGUI;
 
 namespace FastConsoleFairyGUI
 {
-    public class UIFastConsole : Window
+    public class UIMain : Window
     {
         #region component
         // 背景组件
@@ -59,7 +59,7 @@ namespace FastConsoleFairyGUI
         // 是否列表保持在最下面
         private bool m_listKeepDown = true;
         // 选中列表条目数据
-        private FastConsoleEntry selectedData;
+        private LogEntry selectedData;
         // 最大化
         private bool m_maximizeShow;
         // 显示
@@ -67,6 +67,7 @@ namespace FastConsoleFairyGUI
 
         protected override void OnInit()
         {
+            UIPackage.AddPackage("FastConsole/FastConsole");
             contentPane = UIPackage.CreateObject("FastConsole", "panel").asCom;
             contentPane.MakeFullScreen();
             sortingOrder = int.MaxValue;
@@ -78,12 +79,12 @@ namespace FastConsoleFairyGUI
             m_isShow = true;
             m_bgCom = contentPane.GetChild("bg").asCom;
             m_windowController = contentPane.GetController("window");
-            if (FastConsoleSetting.data.defaultMinimize)
+            if (FastConsole.options.openState == OpenState.Minimize)
             {
                 m_maximizeShow = false;
                 m_windowController.SetSelectedIndex(1);
             }
-            else
+            else if (FastConsole.options.openState == OpenState.Normal)
             {
                 m_maximizeShow = true;
                 m_windowController.SetSelectedIndex(0);
@@ -103,7 +104,7 @@ namespace FastConsoleFairyGUI
             var bw = GRoot.inst.width / 7;
 
             m_clearBtn = contentPane.GetChild("clear_btn").asButton;
-            m_clearBtn.onClick.Set(OckClear);
+            m_clearBtn.onClick.Set(OckCleanup);
             SetBtnSize(m_clearBtn, bw, 1);
 
             m_collapsedBtn = contentPane.GetChild("collapse_btn").asButton;
@@ -195,7 +196,7 @@ namespace FastConsoleFairyGUI
             // 最大化的时候才更新列表显示
             if (m_maximizeShow)
             {
-                m_list.numItems = FastConsole.inst.viewEntrys.Count;
+                m_list.numItems = FastConsole.inst.viewLogs.Count;
                 if (m_listKeepDown)
                 {
                     m_list.scrollPane.ScrollBottom();
@@ -217,7 +218,7 @@ namespace FastConsoleFairyGUI
                 return;
 
             // 透明设置
-            if (FastConsoleSetting.data.transparent)
+            if (FastConsole.options.transparent)
             {
                 m_tpController.SetSelectedIndex(1);
                 m_tpFliterController.SetSelectedIndex(1);
@@ -235,7 +236,7 @@ namespace FastConsoleFairyGUI
             }
 
             // 穿透设置
-            var touchable = !FastConsoleSetting.data.touch;
+            var touchable = !FastConsole.options.touchEnable;
             m_list.touchable = touchable;
             m_bgCom.touchable = touchable;
 
@@ -258,7 +259,7 @@ namespace FastConsoleFairyGUI
         private void ItemRenderer(int index, GObject obj)
         {
             var item = obj.asCom;
-            var data = FastConsole.inst.viewEntrys[index];
+            var data = FastConsole.inst.viewLogs[index];
 
             var colorController = item.GetController("color");
             var typeController = item.GetController("type");
@@ -272,9 +273,9 @@ namespace FastConsoleFairyGUI
             var copyBtn = item.GetChild("btn_copy").asButton;
 
             // type
-            if (data.logType == ConsoleLogType.Log) typeController.SetSelectedIndex(0);
-            else if (data.logType == ConsoleLogType.Warning) typeController.SetSelectedIndex(1);
-            else if (data.logType == ConsoleLogType.Error) typeController.SetSelectedIndex(2);
+            if (data.logType == LogType.Log) typeController.SetSelectedIndex(0);
+            else if (data.logType == LogType.Warning) typeController.SetSelectedIndex(1);
+            else typeController.SetSelectedIndex(2);
 
             // color
             if (index % 2 == 0) colorController.SetSelectedIndex(0);
@@ -289,14 +290,14 @@ namespace FastConsoleFairyGUI
             else selectedController.SetSelectedIndex(0);
 
             // transparent
-            if (FastConsoleSetting.data.transparent) transparentController.SetSelectedIndex(1);
+            if (FastConsole.options.transparent) transparentController.SetSelectedIndex(1);
             else transparentController.SetSelectedIndex(0);
 
             // count
             if (data.logCount > 999) countText.text = "999+";
             else countText.text = data.logCount.ToString();
 
-            if (!FastConsoleSetting.data.single && data.selected)
+            if (!FastConsole.options.detailEnable && data.selected)
             {
                 contentText.autoSize = AutoSizeType.Height;
                 contentText.text = data.ToString();
@@ -319,7 +320,7 @@ namespace FastConsoleFairyGUI
             }
 
             // 字体颜色设置
-            contentText.color = FastConsoleSetting.data.fontColor[FastConsoleSetting.data.fontColorIndex];
+            contentText.color = FastConsole.options.GetColor();
 
             item.data = data;
         }
@@ -327,10 +328,10 @@ namespace FastConsoleFairyGUI
         private void OckClickItem(EventContext context)
         {
             GComponent item = context.data as GComponent;
-            FastConsoleEntry data = item.data as FastConsoleEntry;
+            LogEntry data = item.data as LogEntry;
 
             // 显示日志详情界面
-            if (FastConsoleSetting.data.single)
+            if (FastConsole.options.detailEnable)
             {
                 FastConsole.inst.detailUI.Show();
                 FastConsole.inst.detailUI.Refresh(data);
@@ -360,9 +361,9 @@ namespace FastConsoleFairyGUI
 
         private void OckClickItemCopy(EventContext context)
         {
-            GComponent item = context.sender as GComponent;
-            FastConsoleEntry data = item.data as FastConsoleEntry;
-            FastConsole.inst.native.Copy(data.ToString());
+            // GComponent item = context.sender as GComponent;
+            // LogEntry data = item.data as LogEntry;
+            // TODO
         }
 
         private void OnListTouchBegin() { m_listKeepDown = false; }
@@ -371,37 +372,37 @@ namespace FastConsoleFairyGUI
         private void OnFilterChange()
         {
             Reset();
-            FastConsole.inst.Filter(m_filterInput.text);
+            FastConsole.inst.searchTarget = m_filterInput.text;
         }
 
-        private void OckClear()
+        private void OckCleanup()
         {
             Reset();
-            FastConsole.inst.Clear();
+            FastConsole.inst.Cleanup();
         }
 
         private void OckCollapse()
         {
             Reset();
-            FastConsole.inst.SetCollapsed(m_collapsedBtn.selected);
+            FastConsole.inst.collapsed = m_collapsedBtn.selected;
         }
 
         private void OckInfo()
         {
             Reset();
-            FastConsole.inst.SetInfoSelected(m_infoBtn.selected);
+            FastConsole.inst.infoSelected = m_infoBtn.selected;
         }
 
         private void OckWarn()
         {
             Reset();
-            FastConsole.inst.SetWarnSelected(m_warnBtn.selected);
+            FastConsole.inst.warnSelected = m_warnBtn.selected;
         }
 
         private void OckError()
         {
             Reset();
-            FastConsole.inst.SetErrorSelected(m_errorBtn.selected);
+            FastConsole.inst.errorSelected = m_errorBtn.selected;
         }
 
         private void OckSetting() { FastConsole.inst.settingUI.Show(); }
@@ -430,9 +431,7 @@ namespace FastConsoleFairyGUI
 
         private void OckCmdSend()
         {
-            string cmd = m_cmdInput.text;
-            if (!string.IsNullOrEmpty(cmd))
-                FastConsole.inst.command.Execute(cmd);
+            FastConsole.inst.ExecuteCommand(m_cmdInput.text);
             m_cmdInput.text = "";
             m_cmdSendBtn.visible = false;
         }

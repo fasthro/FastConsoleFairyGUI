@@ -10,10 +10,10 @@ using UnityEngine;
 
 namespace FastConsoleFairyGUI
 {
-    public class FastConsoleEntry : IEquatable<FastConsoleEntry>
+    public class LogEntry : IEquatable<LogEntry>
     {
-		// 日志类型
-		public ConsoleLogType logType;
+        // 日志类型
+        public LogType logType;
         // 日志内容
         public string logContent;
         // 日志堆栈内容
@@ -31,7 +31,7 @@ namespace FastConsoleFairyGUI
         // tostring content
         private string m_content;
 
-        public FastConsoleEntry(string logContent, string stackContent, ConsoleLogType logType)
+        public LogEntry(string logContent, string stackContent, LogType logType)
         {
             this.logContent = logContent;
             this.stackContent = stackContent;
@@ -40,27 +40,28 @@ namespace FastConsoleFairyGUI
             this.selected = false;
         }
 
-        public void Reset()
+        public LogEntry Reset()
         {
             logCount = 1;
             selected = false;
+            return this;
         }
 
         public override string ToString()
         {
-            if(string.IsNullOrEmpty(m_content))
+            if (string.IsNullOrEmpty(m_content))
                 m_content = string.Concat(logContent, "\n\n", stackContent);
             return m_content;
         }
 
         // 自定义 Equals
-        public bool Equals(FastConsoleEntry entry)
+        public bool Equals(LogEntry entry)
         {
             return logContent == entry.logContent && stackContent == entry.stackContent;
         }
 
         // override object.GetHashCode
-		// 最快获取字符串哈希方法 https://stackoverflow.com/a/19250516/2373034
+        // 最快获取字符串哈希方法 https://stackoverflow.com/a/19250516/2373034
         public override int GetHashCode()
         {
             if (!m_generateHasValue)

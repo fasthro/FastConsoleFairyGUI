@@ -16,7 +16,9 @@
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
       <relation target="" sidePair="width-width,height-height"/>
     </image>
-    <richtext id="n1_ku63" name="content_text" xy="73,12" size="965,36" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" text=""/>
+    <richtext id="n1_ku63" name="content_text" xy="73,12" size="965,36" fontSize="28" color="#a7a7a7" vAlign="middle" autoSize="none" text="">
+      <relation target="" sidePair="width-width,height-height"/>
+    </richtext>
     <image id="n2_ku63" name="icon_error_img" src="ku638" fileName="image/IconError.png" xy="19,6" size="48,48">
       <gearDisplay controller="type" pages="2"/>
     </image>

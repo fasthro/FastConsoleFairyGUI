@@ -9,19 +9,11 @@ using UnityEngine;
 using FairyGUI;
 using System.Text.RegularExpressions;
 using System;
+using UnityEditor;
+using System.Reflection;
 
 namespace FastConsoleFairyGUI
 {
-    /// <summary>
-    /// Log Type
-    /// </summary>
-    public enum ConsoleLogType
-    {
-        Log,
-        Warning,
-        Error,
-    }
-
     public class FastConsole : MonoBehaviour
     {
         private static FastConsole _inst;
@@ -39,11 +31,11 @@ namespace FastConsoleFairyGUI
             }
         }
 
-        public FastConsoleNative native { get; private set; }
-        public Command command { get; private set; }
-        public UIFastConsole mainUI { get; private set; }
-        public UIFastConsoleDetail detailUI { get; private set; }
-        public UIFastConsoleSetting settingUI { get; private set; }
+        public static Options options;
+
+        public UIMain mainUI { get; private set; }
+        public UIDetail detailUI { get; private set; }
+        public UISetting settingUI { get; private set; }
 
         // count
         public int infoCount { get; private set; }
@@ -51,24 +43,75 @@ namespace FastConsoleFairyGUI
         public int errorCount { get; private set; }
 
         // selected
-        public bool infoSelected { get; private set; }
-        public bool warnSelected { get; private set; }
-        public bool errorSelected { get; private set; }
+        private bool m_infoSelected;
+        public bool infoSelected
+        {
+            get { return m_infoSelected; }
+            set
+            {
+                m_infoSelected = value;
+                Recalculate();
+                mainUI.Refresh();
+            }
+        }
 
-        // 当前显示的列表
-        public List<FastConsoleEntry> viewEntrys { get; private set; }
+        private bool m_warnSelected;
+        public bool warnSelected
+        {
+            get { return m_warnSelected; }
+            set
+            {
+                m_warnSelected = value;
+                Recalculate();
+                mainUI.Refresh();
+            }
+        }
 
-        // 最小化
-        public bool collapsed { get; private set; }
+        private bool m_errorSelected;
+        public bool errorSelected
+        {
+            get { return m_errorSelected; }
+            set
+            {
+                m_errorSelected = value;
+                Recalculate();
+                mainUI.Refresh();
+            }
+        }
 
-        // log 条目列表
-        private List<FastConsoleEntry> m_entrys;
-        // 合并字典<日志条目,在viewEntrys列表中的索引>
-        private Dictionary<FastConsoleEntry, int> m_sameDic;
-        // 合并所有条目字典<日志条目,在viewEntrys列表中的索引>
-        private Dictionary<FastConsoleEntry, bool> m_sameAllDic;
-        // 过滤字符串
-        private string m_filter;
+        // collapsed
+        private bool m_collapsed;
+        public bool collapsed
+        {
+            get { return m_collapsed; }
+            set
+            {
+                m_collapsed = value;
+                Recalculate();
+                mainUI.Refresh();
+            }
+        }
+
+        // 搜索字符串
+        private string m_searchTarget;
+        public string searchTarget
+        {
+            set
+            {
+                m_searchTarget = value;
+            }
+        }
+
+        // 显示日志集合
+        public List<LogEntry> viewLogs { get; private set; }
+        // 所有日志集合
+        private List<LogEntry> m_logs;
+        // 合并日志集合
+        private Dictionary<int, LogEntry> m_merges;
+
+        // 命令
+        private Dictionary<string, Command> m_commandDictionary = new Dictionary<string, Command>();
+        private Trie<string> m_commandsTrie = new Trie<string>();
 
         /// <summary>
         /// 初始化
@@ -78,93 +121,96 @@ namespace FastConsoleFairyGUI
         {
             if (!enabled) return;
             DontDestroyOnLoad(this);
+            // log 条目列表
+            m_logs = new List<LogEntry>(128);
+            viewLogs = new List<LogEntry>(128);
+            m_merges = new Dictionary<int, LogEntry>();
+            // 默认设置
+            m_collapsed = false;
+            m_infoSelected = true;
+            m_warnSelected = true;
+            m_errorSelected = true;
+            // command
+            CollectCommands();
+            // options
+            options = Resources.Load("FastConsoleOptions") as Options;
+            // UI
+            mainUI = new UIMain();
+            detailUI = new UIDetail();
+            settingUI = new UISetting();
+            // 显示主界面
+            mainUI.Show();
+
             // 注册日志监听
             Application.logMessageReceivedThreaded -= ReceivedLog;
             Application.logMessageReceivedThreaded += ReceivedLog;
-            // log 条目列表
-            m_entrys = new List<FastConsoleEntry>(128);
-            viewEntrys = new List<FastConsoleEntry>(128);
-            m_sameDic = new Dictionary<FastConsoleEntry, int>(128);
-            m_sameAllDic = new Dictionary<FastConsoleEntry, bool>(128);
-            // 默认设置
-            collapsed = false;
-            infoSelected = true;
-            warnSelected = true;
-            errorSelected = true;
-            // native
-            native = new FastConsoleNative();
-            // 命令
-            command = new Command();
-            // 添加UI包
-            UIPackage.AddPackage("FastConsole/FastConsole");
-            // 创建UI
-            mainUI = new UIFastConsole();
-            detailUI = new UIFastConsoleDetail();
-            settingUI = new UIFastConsoleSetting();
-            // 显示主界面
-            mainUI.Show();
         }
 
         void OnDestory()
         {
             Application.logMessageReceived -= ReceivedLog;
-            if (native != null) native.Release();
         }
+
+        #region log
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)
         {
-            var logEntry = new FastConsoleEntry(logString, stackTrace, ToConsoleLogTyoe(logType));
-            m_entrys.Add(logEntry);
-            AddEntry(logEntry);
+            if (mainUI == null) return;
+            var logEntry = new LogEntry(logString, stackTrace, logType);
+            m_logs.Add(logEntry);
+            AddViewEntry(logEntry);
             mainUI.Refresh();
         }
 
-        private void AddEntry(FastConsoleEntry logEntry)
+        private void AddViewEntry(LogEntry logEntry)
         {
+            bool addCount = false;
             if (!collapsed)
             {
-                if (FilterRule(logEntry))
-                    viewEntrys.Add(logEntry);
-                SetCount(logEntry);
+                if (MatchFilter(logEntry))
+                    viewLogs.Add(logEntry);
+                addCount = true;
             }
             else
             {
-                int index = -1;
-                if (m_sameDic.TryGetValue(logEntry, out index))
-                    viewEntrys[index].logCount++;
+                int key = logEntry.GetHashCode();
+                if (m_merges.ContainsKey(key))
+                {
+                    m_merges[key].logCount++;
+                }
                 else
                 {
-                    if (FilterRule(logEntry))
+                    if (MatchFilter(logEntry))
                     {
-                        m_sameDic.Add(logEntry, viewEntrys.Count);
-                        viewEntrys.Add(logEntry);
+                        m_merges.Add(logEntry.GetHashCode(), logEntry);
+                        viewLogs.Add(logEntry);
+                        addCount = true;
                     }
                 }
+            }
 
-                if (!m_sameAllDic.ContainsKey(logEntry))
-                {
-                    m_sameAllDic.Add(logEntry, true);
-                    SetCount(logEntry);
-                }
+            if (addCount)
+            {
+                if (logEntry.logType == LogType.Log) infoCount++;
+                else if (logEntry.logType == LogType.Warning) warnCount++;
+                else errorCount++;
             }
         }
 
-        private ConsoleLogType ToConsoleLogTyoe(LogType logType)
+        /// <summary>
+        /// 匹配过滤字符串
+        /// </summary>
+        /// <param name="entry"></param>
+        /// <returns>是否匹配成功</returns>
+        private bool MatchFilter(LogEntry entry)
         {
-            if (logType == LogType.Log) return ConsoleLogType.Log;
-            else if (logType == LogType.Warning) return ConsoleLogType.Warning;
-            return ConsoleLogType.Error;
-        }
-
-        private bool FilterRule(FastConsoleEntry entry)
-        {
-            if ((infoSelected && entry.logType == ConsoleLogType.Log)
-            || (warnSelected && entry.logType == ConsoleLogType.Warning)
-            || (errorSelected && entry.logType == ConsoleLogType.Error))
+            if ((infoSelected && entry.logType == LogType.Log)
+            || (warnSelected && entry.logType == LogType.Warning)
+            || (errorSelected && (entry.logType == LogType.Error || entry.logType == LogType.Assert || entry.logType == LogType.Exception)))
             {
-                if (!string.IsNullOrEmpty(m_filter))
+                if (!string.IsNullOrEmpty(m_searchTarget))
                 {
-                    Regex rgx = new Regex(m_filter);
+                    Regex rgx = new Regex(m_searchTarget);
                     Match match = rgx.Match(entry.logContent);
                     return match.Success;
                 }
@@ -173,68 +219,152 @@ namespace FastConsoleFairyGUI
             return false;
         }
 
-
-        private void SetCount(FastConsoleEntry logEntry)
-        {
-            if (logEntry.logType == ConsoleLogType.Log) infoCount++;
-            else if (logEntry.logType == ConsoleLogType.Warning) warnCount++;
-            else if (logEntry.logType == ConsoleLogType.Error) errorCount++;
-        }
-
-        private void Reset()
+        /// <summary>
+        /// 重新计算数据
+        /// </summary>
+        private void Recalculate()
         {
             infoCount = 0;
             warnCount = 0;
             errorCount = 0;
 
-            viewEntrys.Clear();
-            m_sameDic.Clear();
-            m_sameAllDic.Clear();
+            viewLogs.Clear();
+            m_merges.Clear();
 
-            for (int i = 0; i < m_entrys.Count; i++)
+            for (int i = 0; i < m_logs.Count; i++)
             {
-                m_entrys[i].Reset();
-                AddEntry(m_entrys[i]);
+                AddViewEntry(m_logs[i].Reset());
             }
+        }
+
+        /// <summary>
+        /// 清理日志
+        /// </summary>
+        public void Cleanup()
+        {
+            m_logs.Clear();
+            Recalculate();
             mainUI.Refresh();
         }
 
-        public void Clear()
+        #endregion
+
+        #region  command
+        /// <summary>
+        /// 收集所有命令
+        /// </summary>
+        private void CollectCommands()
         {
-            m_entrys.Clear();
-            Reset();
-            mainUI.Refresh();
+            Assembly assembly = Assembly.Load("Assembly-CSharp");
+            var types = assembly.GetTypes();
+            BindingFlags flags = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+
+            foreach (var type in types)
+            {
+                var methods = type.GetMethods(flags);
+                foreach (var method in methods)
+                {
+                    var atr = method.GetCustomAttribute(typeof(MethodCommandAttribute), false);
+                    if (atr != null)
+                    {
+                        if (method.IsStatic) AddStaticMethodCommand(method, atr as MethodCommandAttribute);
+                    }
+                }
+            }
         }
 
-        public void SetCollapsed(bool selected)
+        /// <summary>
+        /// 添加静态方法命令
+        /// </summary>
+        /// <param name="info"></param>
+        /// <param name="attr"></param>
+        private void AddStaticMethodCommand(MethodInfo info, MethodCommandAttribute attr)
         {
-            collapsed = selected;
-            Reset();
+            if (m_commandDictionary.ContainsKey(attr.name))
+            {
+                Debug.LogError("Multiple commands with the same name are not allowed. [" + attr.name + "]");
+                return;
+            }
+            else
+            {
+                var command = new StaticMethodCommand(attr.name, attr.description, info);
+                m_commandDictionary.Add(attr.name, command);
+                m_commandsTrie.Add(new TrieEntry<string>(attr.name, attr.name));
+            }
         }
 
-        public void SetInfoSelected(bool selected)
+        /// <summary>
+        /// 添加静态方法命令
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="methodName"></param>
+        /// <param name="type"></param>
+        public void AddStaticMethodCommand(string name, string description, string methodName, Type type)
         {
-            infoSelected = selected;
-            Reset();
+            if (m_commandDictionary.ContainsKey(name))
+            {
+                Debug.LogError("Multiple commands with the same name are not allowed. [" + name + "]");
+                return;
+            }
+            else
+            {
+                var info = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+                if (info != null)
+                {
+                    var command = new StaticMethodCommand(name, description, info);
+                    m_commandDictionary.Add(name, command);
+                    m_commandsTrie.Add(new TrieEntry<string>(name, name));
+                }
+            }
         }
 
-        public void SetWarnSelected(bool selected)
+        /// <summary>
+        /// 添加方法命令
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="description"></param>
+        /// <param name="methodName"></param>
+        /// <param name="type"></param>
+        /// <param name="target"></param>
+        public void AddMethodCommand(string name, string description, string methodName, Type type, object target)
         {
-            warnSelected = selected;
-            Reset();
+            if (target == null) return;
+            if (m_commandDictionary.ContainsKey(name))
+            {
+                Debug.LogError("Multiple commands with the same name are not allowed. [" + name + "]");
+                return;
+            }
+            else
+            {
+                var info = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static);
+                if (info != null)
+                {
+                    var command = new MethodCommand(name, description, info, target);
+                    m_commandDictionary.Add(name, command);
+                    m_commandsTrie.Add(new TrieEntry<string>(name, name));
+                }
+            }
         }
 
-        public void SetErrorSelected(bool selected)
+        /// <summary>
+        /// 执行命令
+        /// </summary>
+        /// <param name="line"></param>
+        public void ExecuteCommand(string line)
         {
-            errorSelected = selected;
-            Reset();
+            var words = line.Split(new char[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
+            if (words.Length > 0)
+            {
+                Command command = null;
+                m_commandDictionary.TryGetValue(words[0], out command);
+                if (command != null)
+                {
+                    command.Execute(line);
+                }
+            }
         }
-
-        public void Filter(string filter)
-        {
-            m_filter = filter;
-            Reset();
-        }
+        #endregion
     }
 }
 

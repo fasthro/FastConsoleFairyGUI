@@ -10,9 +10,9 @@ using FairyGUI;
 
 namespace FastConsoleFairyGUI
 {
-    public class UIFastConsoleDetail : Window
+    public class UIDetail : Window
     {
-        private FastConsoleEntry m_entry;
+        private LogEntry m_entry;
 
         #region component
         private GButton m_copyBtn;
@@ -36,7 +36,7 @@ namespace FastConsoleFairyGUI
             m_copyBtn.onClick.Set(OckCopy);
 
             m_closeBtn = contentPane.GetChild("close_btn").asButton;
-            m_closeBtn.onClick.Set(OckClose);
+            m_closeBtn.onClick.Set(Hide);
 
             m_list = contentPane.GetChild("list").asList;
             m_list.RemoveChildrenToPool();
@@ -46,13 +46,13 @@ namespace FastConsoleFairyGUI
             m_typeController = contentPane.GetController("type");
         }
 
-        public void Refresh(FastConsoleEntry logEntry)
+        public void Refresh(LogEntry logEntry)
         {
             m_entry = logEntry;
 
-            if (logEntry.logType == ConsoleLogType.Log) m_typeController.SetSelectedIndex(0);
-            else if (logEntry.logType == ConsoleLogType.Warning) m_typeController.SetSelectedIndex(1);
-            else if (logEntry.logType == ConsoleLogType.Error) m_typeController.SetSelectedIndex(2);
+            if (logEntry.logType == LogType.Log) m_typeController.SetSelectedIndex(0);
+            else if (logEntry.logType == LogType.Warning) m_typeController.SetSelectedIndex(1);
+            else m_typeController.SetSelectedIndex(2);
 
             var content_text = m_listItem.GetChild("content_text").asRichTextField;
             content_text.text = logEntry.ToString();
@@ -74,8 +74,10 @@ namespace FastConsoleFairyGUI
             m_list.scrollPane.ScrollTop();
         }
 
-        private void OckCopy() { FastConsole.inst.native.Copy(m_entry.ToString()); }
-        private void OckClose() { Hide(); }
+        private void OckCopy()
+        {
+            // TODO
+        }
     }
 }
 

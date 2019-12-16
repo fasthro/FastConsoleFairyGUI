@@ -10,7 +10,7 @@ using FairyGUI;
 
 namespace FastConsoleFairyGUI
 {
-    public class UIFastConsoleSetting : Window
+    public class UISetting : Window
     {
         #region component
         private GButton m_minimizeBtn;
@@ -40,22 +40,22 @@ namespace FastConsoleFairyGUI
         {
             m_minimizeBtn = contentPane.GetChild("minimize_btn").asButton;
             m_minimizeBtn.onClick.Set(OckMinimize);
-            m_minimizeBtn.selected = FastConsoleSetting.data.defaultMinimize;
+            m_minimizeBtn.selected = FastConsole.options.openState == OpenState.Minimize;
 
             m_transparentBtn = contentPane.GetChild("transparent_btn").asButton;
             m_transparentBtn.onClick.Set(OckTransparent);
-            m_transparentBtn.selected = FastConsoleSetting.data.transparent;
+            m_transparentBtn.selected = FastConsole.options.transparent;
 
             m_touchBtn = contentPane.GetChild("touch_btn").asButton;
             m_touchBtn.onClick.Set(OckTouch);
-            m_touchBtn.selected = FastConsoleSetting.data.touch;
+            m_touchBtn.selected = FastConsole.options.touchEnable;
 
             m_singleShowBtn = contentPane.GetChild("single_btn").asButton;
-            m_singleShowBtn.onClick.Set(OckSingle);
-            m_singleShowBtn.selected = FastConsoleSetting.data.single;
+            m_singleShowBtn.onClick.Set(OckDetail);
+            m_singleShowBtn.selected = FastConsole.options.detailEnable;
 
             m_btnClose = contentPane.GetChild("title").asCom.GetChild("close_btn").asButton;
-            m_btnClose.onClick.Set(OckClose);
+            m_btnClose.onClick.Set(Hide);
 
             // list color
             m_colorList = contentPane.GetChild("color_list").asList;
@@ -66,49 +66,39 @@ namespace FastConsoleFairyGUI
             for (int i = 0; i < m_maxColorCount; i++)
             {
                 var index = (i + 1).ToString();
-                colorItem.GetChild("color_" + index).asImage.color = FastConsoleSetting.data.fontColor[i];
+                colorItem.GetChild("color_" + index).asImage.color = FastConsole.options.colors[i];
                 m_colorBtn[i] = colorItem.GetChild("color_btn_" + index).asButton;
                 m_colorBtn[i].data = i;
                 m_colorBtn[i].onClick.Set(OckColor);
 
-                if (FastConsoleSetting.data.fontColorIndex == i) m_colorBtn[i].selected = true;
+                if (FastConsole.options.colorIndex == i) m_colorBtn[i].selected = true;
                 else m_colorBtn[i].selected = false;
             }
             m_colorList.AddChild(colorItem);
         }
 
-        // 默认界面最小化显示
-        private void OckMinimize() { FastConsoleSetting.data.defaultMinimize = m_minimizeBtn.selected; }
+        protected override void OnHide()
+        {
+            FastConsole.inst.mainUI.RefreshSetting();
+        }
 
-        // 透明模式
-        private void OckTransparent() { FastConsoleSetting.data.transparent = m_transparentBtn.selected; }
-
-        // 穿透模式
-        private void OckTouch() { FastConsoleSetting.data.touch = m_touchBtn.selected; }
-
-        // 设置单独界面展示日志详情
-        private void OckSingle() { FastConsoleSetting.data.single = m_singleShowBtn.selected; }
-
-        // 颜色选择
+        private void OckMinimize() { FastConsole.options.openState = m_minimizeBtn.selected ? OpenState.Minimize : OpenState.Normal; }
+        private void OckTransparent() { FastConsole.options.transparent = m_transparentBtn.selected; }
+        private void OckTouch() { FastConsole.options.touchEnable = m_touchBtn.selected; }
+        private void OckDetail() { FastConsole.options.detailEnable = m_singleShowBtn.selected; }
         private void OckColor(EventContext context)
         {
             var btn = context.sender as GButton;
             var index = (int)btn.data;
 
-            if (FastConsoleSetting.data.fontColorIndex != index)
+            if (FastConsole.options.colorIndex != index)
             {
-                FastConsoleSetting.data.fontColorIndex = index;
+                FastConsole.options.colorIndex = index;
                 for (int i = 0; i < m_maxColorCount; i++)
                 {
-                    m_colorBtn[i].selected = FastConsoleSetting.data.fontColorIndex == i;
+                    m_colorBtn[i].selected = FastConsole.options.colorIndex == i;
                 }
             }
-        }
-
-        private void OckClose()
-        {
-            FastConsole.inst.mainUI.RefreshSetting();
-            Hide();
         }
     }
 }
