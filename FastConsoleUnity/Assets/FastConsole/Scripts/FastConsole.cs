@@ -108,10 +108,16 @@ namespace FastConsoleFairyGUI
         private List<LogEntry> m_logs;
         // 合并日志集合
         private Dictionary<int, LogEntry> m_merges;
+        // 主线程刷新视图
+        private bool m_mainThreadRefreshView;
 
         // 命令
         private Dictionary<string, Command> m_commandDictionary = new Dictionary<string, Command>();
         private Trie<string> m_commandsTrie = new Trie<string>();
+
+        // systeminfo
+        private FPSCounter mFPSCounter = new FPSCounter();
+        public FPSCounter fpsCounter { get { return mFPSCounter; } }
 
         /// <summary>
         /// 初始化
@@ -151,15 +157,27 @@ namespace FastConsoleFairyGUI
             Application.logMessageReceived -= ReceivedLog;
         }
 
+        void Update()
+        {
+            if (_inst == null) return;
+            mFPSCounter.OnUpdate();
+
+            if (m_mainThreadRefreshView)
+            {
+                m_mainThreadRefreshView = false;
+                mainUI.Refresh();
+            }
+        }
+
         #region log
 
         private void ReceivedLog(string logString, string stackTrace, LogType logType)
         {
-            if (mainUI == null) return;
+            if (_inst == null) return;
             var logEntry = new LogEntry(logString, stackTrace, logType);
             m_logs.Add(logEntry);
             AddViewEntry(logEntry);
-            mainUI.Refresh();
+            m_mainThreadRefreshView = true;
         }
 
         private void AddViewEntry(LogEntry logEntry)

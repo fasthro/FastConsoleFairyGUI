@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="150,150">
   <controller name="transparent" pages="0,正常,1,透明" selected="0"/>
+  <controller name="systemInfo" alias="设备信息" pages="0,,1," selected="0">
+    <remark page="0" value="显示"/>
+    <remark page="1" value="不显示"/>
+  </controller>
   <displayList>
     <component id="n0_bs5m" name="bg" src="bs5m2f" fileName="component/背景圆角遮罩.xml" xy="0,0" size="150,150">
       <gearLook controller="transparent" pages="1" values="0.2,0,0,1" default="1,0,0,1"/>
@@ -12,5 +16,11 @@
     <text id="n4_bs5m" name="info_text" xy="41,10" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
     <text id="n5_bs5m" name="warn_text" xy="41,56" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
     <text id="n6_bs5m" name="error_text" xy="41,102" size="96,37" fontSize="28" color="#a7a7a7" align="right" vAlign="middle" autoSize="none" bold="true" text=""/>
+    <image id="n8_gjrl" name="n8" src="ku63u" fileName="image/白色圆角底图.png" xy="0,153" size="150,43" group="n17_gjrl" color="#2e2e29"/>
+    <text id="n12_gjrl" name="fps_title" xy="3,161" size="55,34" group="n17_gjrl" fontSize="25" color="#e7e7e7" vAlign="middle" bold="true" text="FPS"/>
+    <text id="n13_gjrl" name="fps_text" xy="128,158" pivot="1,1" size="10,37" group="n17_gjrl" fontSize="28" color="#00ff00" align="right" vAlign="middle" bold="true" text=""/>
+    <group id="n17_gjrl" name="systeminfo" xy="0,153" size="150,43" advanced="true">
+      <gearDisplay controller="systemInfo" pages="0"/>
+    </group>
   </displayList>
 </component>

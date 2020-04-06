@@ -51,6 +51,9 @@
     <component id="iwd62x" name="color_item.xml" path="/component/"/>
     <image id="lt4f2z" name="发送.png" path="/image/"/>
     <image id="lt4f31" name="命令列表.png" path="/image/"/>
+    <image id="gjrl32" name="checkbox-unselected.png" path="/image/"/>
+    <image id="gjrl33" name="checkbox-selected.png" path="/image/"/>
+    <component id="gjrl35" name="check单选框.xml" path="/component/"/>
   </resources>
   <publish name="FastConsole" path="..\FastConsoleUnity\Assets\FastConsole\Resources\FastConsole" packageCount="2">
     <atlas compression="true" index="0"/>

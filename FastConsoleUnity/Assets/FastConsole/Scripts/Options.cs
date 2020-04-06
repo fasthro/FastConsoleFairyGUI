@@ -18,13 +18,26 @@ namespace FastConsoleFairyGUI
         Minimize,
     }
 
+    /// <summary>
+    /// 迷你界面布局
+    /// </summary>
+    public enum MiniLayout
+    {
+        LEFT_TOP,
+        LEFT_BOTTOM,
+        RIGHT_TOP,
+        RIGHT_BOTTOM,
+    }
+
     [System.Serializable]
     public class Options : ScriptableObject
     {
         public OpenState openState = OpenState.Minimize;  // 打开状态
+        public MiniLayout miniLayout = MiniLayout.LEFT_TOP;
         public bool transparent;                          // 透明模式
         public bool touchEnable;                          // 是否接受输入事件
         public bool detailEnable;                         // 是否启用日志详情界面
+        public bool systemInfoEnable = true;              // 是否启用系统信息
         public Color32[] colors = new Color32[]
         {
             new Color32(0xa7, 0xa7, 0xa7, 0xff),

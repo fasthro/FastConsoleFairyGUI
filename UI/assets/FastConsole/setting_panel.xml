@@ -1,41 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <component size="2048,1152">
+  <controller name="layout" pages="0,,1,,2,,3," selected="1"/>
   <displayList>
     <component id="n3_ku63" name="bg" src="ku63r" fileName="component/背景遮罩.xml" xy="0,0" size="2048,1152">
       <relation target="" sidePair="width-width,height-height"/>
     </component>
-    <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="0,0" size="2048,60">
+    <component id="n8_ku63" name="title" src="ku631c" fileName="component/标题组件.xml" xy="2,0" size="2048,60">
       <relation target="" sidePair="top-top,width-width"/>
       <Button icon="ui://n5bjuvogku6313"/>
     </component>
-    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,339" size="1988,68">
-      <relation target="" sidePair="width-width,top-top"/>
-      <Button title="单独界面展示日志详情"/>
-    </component>
-    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,268" size="1988,68">
-      <relation target="" sidePair="width-width,top-top"/>
-      <Button title="穿透模式"/>
-    </component>
-    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,126" size="1988,68">
-      <relation target="" sidePair="width-width,top-top"/>
-      <Button title="透明模式"/>
-    </component>
-    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,197" size="1988,68">
+    <image id="n74_gjrl" name="group_bg1" src="ku63u" fileName="image/白色圆角底图.png" xy="30,74" size="1988,408" group="n78_gjrl" color="#20201d"/>
+    <component id="n21_jk93" name="minimize_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,197" size="1988,68" group="n78_gjrl">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="默认界面最小化模式"/>
     </component>
-    <component id="n24_bs5m" name="subtitle_1" src="ku631d" fileName="component/副标题组件.xml" xy="30,73" size="1988,50">
+    <component id="n24_bs5m" name="subtitle_1" src="ku631d" fileName="component/副标题组件.xml" xy="30,73" size="1988,50" group="n78_gjrl">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="界面基础设置"/>
     </component>
-    <component id="n23_bs5m" name="subtitle_2" src="ku631d" fileName="component/副标题组件.xml" xy="30,467" size="1988,50">
+    <component id="n18_puz5" name="single_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,339" size="1988,68" group="n78_gjrl">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="单独界面展示日志详情"/>
+    </component>
+    <component id="n19_puz5" name="touch_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,268" size="1988,68" group="n78_gjrl">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="穿透模式"/>
+    </component>
+    <component id="n20_jk93" name="transparent_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,126" size="1988,68" group="n78_gjrl">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="透明模式"/>
+    </component>
+    <component id="n67_gjrl" name="systeminfo_btn" src="puz526" fileName="component/开关按钮.xml" xy="30,410" size="1988,68" group="n78_gjrl">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="显示 SystemInfo 信息"/>
+    </component>
+    <group id="n78_gjrl" name="group1" xy="30,73" size="1988,409"/>
+    <image id="n75_gjrl" name="group_2" src="ku63u" fileName="image/白色圆角底图.png" xy="30,499" size="1988,189" group="n79_gjrl" color="#20201d"/>
+    <component id="n23_bs5m" name="subtitle_2" src="ku631d" fileName="component/副标题组件.xml" xy="30,497" size="1988,50" group="n79_gjrl">
       <relation target="" sidePair="width-width,top-top"/>
       <Button title="列表颜色设置"/>
     </component>
-    <list id="n66_iwd6" name="color_list" xy="45,539" size="1962,102" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://n5bjuvogiwd62x">
+    <list id="n66_iwd6" name="color_list" xy="45,569" size="1962,102" group="n79_gjrl" layout="flow_hz" overflow="scroll" scroll="horizontal" defaultItem="ui://n5bjuvogiwd62x">
       <relation target="n23_bs5m" sidePair="top-top"/>
       <relation target="" sidePair="width-width"/>
       <item/>
     </list>
+    <group id="n79_gjrl" name="group2" xy="30,497" size="1988,191"/>
+    <image id="n76_gjrl" name="group_bg3" src="ku63u" fileName="image/白色圆角底图.png" xy="30,703" size="1988,152" group="n80_gjrl" color="#20201d"/>
+    <component id="n68_gjrl" name="subtitle_2" src="ku631d" fileName="component/副标题组件.xml" xy="30,703" size="1988,50" group="n80_gjrl">
+      <relation target="" sidePair="width-width,top-top"/>
+      <Button title="最小化界面布局"/>
+    </component>
+    <component id="n70_gjrl" name="btn_left_top" src="gjrl35" fileName="component/check单选框.xml" xy="76,776" group="n80_gjrl">
+      <Button title="Left Top" controller="layout" page="0"/>
+    </component>
+    <component id="n71_gjrl" name="btn_right_top" src="gjrl35" fileName="component/check单选框.xml" xy="678,776" group="n80_gjrl">
+      <Button checked="true" title="Right Top" controller="layout" page="1"/>
+    </component>
+    <component id="n72_gjrl" name="btn_left_bottom" src="gjrl35" fileName="component/check单选框.xml" xy="377,776" group="n80_gjrl">
+      <Button title="Left Bottom" controller="layout" page="2"/>
+    </component>
+    <component id="n73_gjrl" name="btn_right_bottom" src="gjrl35" fileName="component/check单选框.xml" xy="979,776" group="n80_gjrl">
+      <Button title="Right Bottom" controller="layout" page="3"/>
+    </component>
+    <group id="n80_gjrl" name="group3" xy="30,703" size="1988,152"/>
   </displayList>
 </component>

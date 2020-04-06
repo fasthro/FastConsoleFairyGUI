@@ -42,6 +42,8 @@ namespace FastConsoleFairyGUI
         private GTextField m_minInfoCountText;
         private GTextField m_minWarnCountText;
         private GTextField m_minErrorCountText;
+        private GTextField m_minFPSText;
+        private Controller m_minSystemController;
         private Controller m_windowController;
 
         // 透明控制器
@@ -49,7 +51,7 @@ namespace FastConsoleFairyGUI
         private Controller m_tpFliterController;
         private Controller m_tpCmdController;
         private Controller m_tpScrllBarController;
-        private Controller m_tpMinimizeController;
+        private Controller m_minTransparentController;
 
         // 菜单控制器
         private Controller m_menuController;
@@ -162,11 +164,35 @@ namespace FastConsoleFairyGUI
             m_minCom.dragBounds = new Rect(0, 0, GRoot.inst.width, GRoot.inst.height);
             m_minCom.onClick.Set(OckMinimizeCom);
 
-            m_tpMinimizeController = m_minCom.GetController("transparent");
+            m_minTransparentController = m_minCom.GetController("transparent");
+            m_minSystemController = m_minCom.GetController("systemInfo");
 
             m_minInfoCountText = m_minCom.GetChild("info_text").asTextField;
             m_minWarnCountText = m_minCom.GetChild("warn_text").asTextField;
             m_minErrorCountText = m_minCom.GetChild("error_text").asTextField;
+            m_minFPSText = m_minCom.GetChild("fps_text").asTextField;
+
+            if (FastConsole.options.miniLayout == MiniLayout.LEFT_TOP)
+            {
+                m_minCom.x = 0;
+                m_minCom.y = 0;
+            }
+            else if (FastConsole.options.miniLayout == MiniLayout.LEFT_BOTTOM)
+            {
+                m_minCom.x = 0;
+                m_minCom.y = GRoot.inst.height - m_minCom.height;
+            }
+            else if (FastConsole.options.miniLayout == MiniLayout.RIGHT_TOP)
+            {
+                m_minCom.x = GRoot.inst.width - m_minCom.width;
+                m_minCom.y = 0;
+            }
+            else if (FastConsole.options.miniLayout == MiniLayout.RIGHT_BOTTOM)
+            {
+                m_minCom.x = GRoot.inst.width - m_minCom.width;
+                m_minCom.y = GRoot.inst.height - m_minCom.height;
+            }
+
 
             // 透明模式控制
             m_tpController = contentPane.GetController("transparent");
@@ -181,6 +207,20 @@ namespace FastConsoleFairyGUI
         protected override void OnHide()
         {
             m_isShow = false;
+        }
+
+        protected override void OnUpdate()
+        {
+            if (FastConsole.options.systemInfoEnable)
+            {
+                if (m_minSystemController.selectedIndex == 1) m_minSystemController.SetSelectedIndex(0);
+                m_minFPSText.color = ((FastConsole.inst.fpsCounter.fpsValue >= 20f) ? Color.green : ((FastConsole.inst.fpsCounter.fpsValue > 10f) ? Color.red : Color.yellow));
+                m_minFPSText.text = FastConsole.inst.fpsCounter.fps;
+            }
+            else
+            {
+                if (m_minSystemController.selectedIndex == 0) m_minSystemController.SetSelectedIndex(1);
+            }
         }
 
         public void Refresh()
@@ -224,7 +264,7 @@ namespace FastConsoleFairyGUI
                 m_tpFliterController.SetSelectedIndex(1);
                 m_tpCmdController.SetSelectedIndex(1);
                 m_tpScrllBarController.SetSelectedIndex(1);
-                m_tpMinimizeController.SetSelectedIndex(1);
+                m_minTransparentController.SetSelectedIndex(1);
             }
             else
             {
@@ -232,7 +272,7 @@ namespace FastConsoleFairyGUI
                 m_tpFliterController.SetSelectedIndex(0);
                 m_tpCmdController.SetSelectedIndex(0);
                 m_tpScrllBarController.SetSelectedIndex(0);
-                m_tpMinimizeController.SetSelectedIndex(0);
+                m_minTransparentController.SetSelectedIndex(0);
             }
 
             // 穿透设置

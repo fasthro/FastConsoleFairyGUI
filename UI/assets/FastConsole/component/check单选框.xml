@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<component size="64,64" extention="Button">
+  <controller name="button" pages="0,up,1,down,2,over,3,selectedOver" selected="0"/>
+  <displayList>
+    <image id="n0_gjrl" name="n0" src="gjrl32" fileName="image/checkbox-unselected.png" xy="0,0" color="#4d4d4d">
+      <gearDisplay controller="button" pages="0"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n1_gjrl" name="n1" src="gjrl33" fileName="image/checkbox-selected.png" xy="0,0" color="#4d4d4d">
+      <gearDisplay controller="button" pages="1"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n2_gjrl" name="n2" src="gjrl32" fileName="image/checkbox-unselected.png" xy="0,0" color="#4d4d4d">
+      <gearDisplay controller="button" pages="2"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <image id="n3_gjrl" name="n3" src="gjrl33" fileName="image/checkbox-selected.png" xy="0,0" color="#4d4d4d">
+      <gearDisplay controller="button" pages="3"/>
+      <relation target="" sidePair="width-width,height-height"/>
+    </image>
+    <text id="n4_gjrl" name="title" xy="65,13" size="10,36" fontSize="28" color="#a7a7a7" vAlign="middle" singleLine="true" text="">
+      <relation target="n0_gjrl" sidePair="middle-middle,left-right"/>
+    </text>
+  </displayList>
+  <Button mode="Radio"/>
+</component>
